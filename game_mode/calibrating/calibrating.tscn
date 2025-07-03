@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlja2q0arbxb5"]
+
+[ext_resource type="Script" uid="uid://qaxe2myakbx0" path="res://game_mode/calibrating/calibrating.gd" id="1_u5tbd"]
+
+[node name="Calibrating" type="Node"]
+script = ExtResource("1_u5tbd")
+
+[node name="World" type="Node2D" parent="."]

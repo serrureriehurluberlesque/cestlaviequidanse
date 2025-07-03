@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcfe65xlfajhq"]
+
+[ext_resource type="PackedScene" uid="uid://gvgiv8v0wn45" path="res://arena/arena.tscn" id="1_bx8u7"]
+[ext_resource type="PackedScene" uid="uid://bohkd3ilffj53" path="res://character/characters/player.tscn" id="2_bis4d"]
+
+[node name="CalibratingGround" instance=ExtResource("1_bx8u7")]
+ROUND_TOTAL_NUMBER = 1
+
+[node name="Player" parent="Characters" index="0" instance=ExtResource("2_bis4d")]

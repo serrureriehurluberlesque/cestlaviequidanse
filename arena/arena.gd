@@ -3,7 +3,7 @@ extends Node2D
 
 signal ended(won)
 
-const ROUND_TOTAL_NUMBER = 10
+@export var ROUND_TOTAL_NUMBER = 10
 
 @onready var action_selection_timer := $ActionSelectionTimer as Timer
 @onready var fast_activation_timer := $FastActionTimer as Timer

@@ -1,3 +1,11 @@
 res://gui/splash_screen/splash_screen.tscn
 res://game_mode/poc/poc.tscn
 res://character/character.tscn
+res://arena/arena.tscn
+res://arena/level/arena_poc_1.tscn
+res://arena/arena.gd
+res://arena/level/calibrating_ground.tscn
+res://character/characters/player.tscn
+res://arena/level/calibrating_ground.gd
+res://game_mode/calibrating/calibrating.tscn
+res://game_mode/calibrating/calibrating.gd

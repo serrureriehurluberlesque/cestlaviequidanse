@@ -13,6 +13,7 @@ script = ExtResource("2_kfao2")
 [node name="Selection" type="CanvasLayer" parent="Decider" index="1"]
 
 [node name="SelectionUI" type="Control" parent="Decider/Selection" index="0"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
