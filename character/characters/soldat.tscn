@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1mgj6sdpkfg8"]
+
+[ext_resource type="PackedScene" uid="uid://cg7lm7bqobbcv" path="res://character/character.tscn" id="1_vro1b"]
+[ext_resource type="Script" uid="uid://ci0f12lqhqbb4" path="res://character/characters/basic_ia.gd" id="2_1ji4x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o6jyn"]
+radius = 1200.0
+
+[node name="Soldat" instance=ExtResource("1_vro1b")]
+
+[node name="Decider" parent="." index="2"]
+script = ExtResource("2_1ji4x")
+
+[node name="Detection" type="Area2D" parent="Decider" index="0"]
+visible = false
+monitorable = false
+
+[node name="Shape" type="CollisionShape2D" parent="Decider/Detection" index="0"]
+shape = SubResource("CircleShape2D_o6jyn")

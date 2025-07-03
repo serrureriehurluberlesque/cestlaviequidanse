@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bemrdbw3ao7iu"]
+
+[ext_resource type="PackedScene" uid="uid://gvgiv8v0wn45" path="res://arena/arena.tscn" id="1_pigfl"]
+[ext_resource type="PackedScene" uid="uid://bohkd3ilffj53" path="res://character/characters/player.tscn" id="2_7lqcx"]
+[ext_resource type="PackedScene" uid="uid://d1mgj6sdpkfg8" path="res://character/characters/soldat.tscn" id="3_137v4"]
+
+[node name="ArenaPoc1" instance=ExtResource("1_pigfl")]
+
+[node name="Player" parent="Characters" index="0" instance=ExtResource("2_7lqcx")]
+position = Vector2(-402, -47)
+
+[node name="Soldat6" parent="Characters" index="1" instance=ExtResource("3_137v4")]
+modulate = Color(1, 0.309804, 1, 1)
+position = Vector2(494, -49)
+team = 2

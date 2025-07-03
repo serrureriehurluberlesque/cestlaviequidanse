@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dg8hsxqe4bj2d"]
+
+[ext_resource type="PackedScene" uid="uid://cg7lm7bqobbcv" path="res://character/character.tscn" id="1_4tx6n"]
+[ext_resource type="Script" uid="uid://bbepi1u2rywcw" path="res://game_mode/test/move_calibration.gd" id="1_5il5y"]
+
+[node name="MoveCalibration" type="Node2D"]
+script = ExtResource("1_5il5y")
+
+[node name="Character" parent="." instance=ExtResource("1_4tx6n")]
+position = Vector2(100, 200)

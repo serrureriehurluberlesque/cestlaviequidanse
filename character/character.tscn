@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://cg7lm7bqobbcv"]
+
+[ext_resource type="Script" uid="uid://bpaf87rq76s1h" path="res://character/character.gd" id="1_yf0e5"]
+[ext_resource type="Texture2D" uid="uid://djb0dthv153rr" path="res://character/assets/default.png" id="2_tgjim"]
+[ext_resource type="PackedScene" uid="uid://c0cttyv7mx1il" path="res://character/actions/move.tscn" id="3_hx151"]
+[ext_resource type="PackedScene" uid="uid://2h3y1mq5pcpl" path="res://character/actions/heavy_attack.tscn" id="4_0rvpn"]
+[ext_resource type="PackedScene" uid="uid://btar1h47so2u3" path="res://character/actions/light_attack.tscn" id="4_tgjim"]
+[ext_resource type="PackedScene" uid="uid://gn10klvgm7qn" path="res://character/actions/medium_attack.tscn" id="5_0rvpn"]
+[ext_resource type="Script" uid="uid://o33r22yt5ntx" path="res://character/decider.gd" id="6_o6jyn"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o6jyn"]
+friction = 0.1
+bounce = 0.7
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_o6jyn"]
+points = PackedVector2Array(-64, -50, -50, -64, 50, -64, 64, -50, 64, 50, 50, 64, -50, 64, -64, 50)
+
+[node name="Character" type="RigidBody2D"]
+mass = 100.0
+physics_material_override = SubResource("PhysicsMaterial_o6jyn")
+continuous_cd = 2
+linear_damp_mode = 1
+script = ExtResource("1_yf0e5")
+
+[node name="Body" type="CollisionShape2D" parent="."]
+shape = SubResource("ConvexPolygonShape2D_o6jyn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Body"]
+modulate = Color(1, 1, 1, 0.490196)
+texture = ExtResource("2_tgjim")
+
+[node name="Actions" type="Node2D" parent="."]
+
+[node name="Move" parent="Actions" instance=ExtResource("3_hx151")]
+
+[node name="LightAttack" parent="Actions" instance=ExtResource("4_tgjim")]
+
+[node name="MediumAttack" parent="Actions" instance=ExtResource("5_0rvpn")]
+
+[node name="HeavyAttack" parent="Actions" instance=ExtResource("4_0rvpn")]
+
+[node name="Decider" type="Node2D" parent="."]
+script = ExtResource("6_o6jyn")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 2
+
+[node name="LifeBar" type="ProgressBar" parent="Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="LifeBarDamage" type="ProgressBar" parent="Control"]
+modulate = Color(1, 1, 1, 0.580392)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+show_percentage = false

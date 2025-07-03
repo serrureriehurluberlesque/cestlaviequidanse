@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://gvgiv8v0wn45"]
+
+[ext_resource type="Script" uid="uid://cpwuyuss0b1j4" path="res://arena/arena.gd" id="1_dkqtx"]
+[ext_resource type="Texture2D" uid="uid://bd65sh4qbommr" path="res://arena/ground.png" id="2_u13ga"]
+
+[node name="Arena" type="Node2D"]
+script = ExtResource("1_dkqtx")
+
+[node name="Ground" type="Sprite2D" parent="."]
+modulate = Color(0.474889, 0.409746, 0.364096, 1)
+texture_repeat = 2
+texture = ExtResource("2_u13ga")
+region_enabled = true
+region_rect = Rect2(0, 0, 4096, 2048)
+region_filter_clip_enabled = true
+
+[node name="Characters" type="Node2D" parent="."]
+
+[node name="ActionSelectionTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="FastActionTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="MoveActionTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="SlowActionTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true

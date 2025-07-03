@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwsk6psuf0msq"]
+
+[ext_resource type="PackedScene" uid="uid://gvgiv8v0wn45" path="res://arena/arena.tscn" id="1_3d4uy"]
+[ext_resource type="PackedScene" uid="uid://bohkd3ilffj53" path="res://character/characters/player.tscn" id="2_5w5x3"]
+[ext_resource type="PackedScene" uid="uid://d1mgj6sdpkfg8" path="res://character/characters/soldat.tscn" id="2_j2cuk"]
+
+[node name="ArenaPoc0" instance=ExtResource("1_3d4uy")]
+
+[node name="Player" parent="Characters" index="0" instance=ExtResource("2_5w5x3")]
+position = Vector2(-402, -47)
+
+[node name="Soldat2" parent="Characters" index="1" instance=ExtResource("2_j2cuk")]
+modulate = Color(1, 1, 0.482353, 1)
+position = Vector2(-469, -271)
+
+[node name="Soldat3" parent="Characters" index="2" instance=ExtResource("2_j2cuk")]
+modulate = Color(1, 1, 0.482353, 1)
+position = Vector2(-489, 195)
+
+[node name="Soldat4" parent="Characters" index="3" instance=ExtResource("2_j2cuk")]
+modulate = Color(1, 0.309804, 1, 1)
+position = Vector2(365, -227)
+team = 2
+
+[node name="Soldat5" parent="Characters" index="4" instance=ExtResource("2_j2cuk")]
+modulate = Color(1, 0.309804, 1, 1)
+position = Vector2(322, 326)
+team = 2
+
+[node name="Soldat6" parent="Characters" index="5" instance=ExtResource("2_j2cuk")]
+modulate = Color(1, 0.309804, 1, 1)
+position = Vector2(494, -49)
+team = 2
+
+[node name="Soldat7" parent="Characters" index="6" instance=ExtResource("2_j2cuk")]
+modulate = Color(1, 0.309804, 1, 1)
+position = Vector2(454, 147)
+team = 2

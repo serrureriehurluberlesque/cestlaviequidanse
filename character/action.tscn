@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://brrts4nchl7ga"]
+
+[ext_resource type="Script" uid="uid://dgrpj6k4h3qob" path="res://character/action.gd" id="1_c7mkc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c7mkc"]
+
+[node name="Action" type="Node2D"]
+script = ExtResource("1_c7mkc")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_c7mkc")
+
+[node name="AnimationTime" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true

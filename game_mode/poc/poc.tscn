@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://0quh20j2ibxq"]
+
+[ext_resource type="Script" uid="uid://cxui5f7wkg0gk" path="res://game_mode/poc/poc.gd" id="1_6lt1x"]
+[ext_resource type="PackedScene" uid="uid://bpmg8ht0jwva4" path="res://gui/splash_screen/splash_screen.tscn" id="2_0ylbl"]
+
+[node name="Poc" type="Node"]
+script = ExtResource("1_6lt1x")
+
+[node name="Gui" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="SplashScreen" parent="Gui" instance=ExtResource("2_0ylbl")]
+layout_mode = 1
+
+[node name="World" type="Node2D" parent="."]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://btar1h47so2u3"]
+
+[ext_resource type="PackedScene" uid="uid://brrts4nchl7ga" path="res://character/action.tscn" id="1_vsksi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8v46k"]
+size = Vector2(120, 80)
+
+[node name="LightAttack" instance=ExtResource("1_vsksi")]
+has_slow_activation = true
+
+[node name="Hitbox" parent="." index="0"]
+position = Vector2(0, -114)
+
+[node name="Shape" parent="Hitbox" index="0"]
+shape = SubResource("RectangleShape2D_8v46k")
