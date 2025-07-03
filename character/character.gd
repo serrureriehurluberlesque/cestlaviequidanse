@@ -1,8 +1,8 @@
 class_name Character
 extends RigidBody2D
 
-const SPEED = 200.0
-const RSPEED = 4.0
+const SPEED = 72.0
+const RSPEED = 1.35
 const SPRITE_ROTATION = PI / 2
 
 @export var max_health_points:= 100.0

@@ -6,7 +6,7 @@
 size = Vector2(160, 160)
 
 [node name="MediumAttack" instance=ExtResource("1_8v46k")]
-move_range = 0.3
+move_range = 0.5
 damage = 15.0
 has_slow_activation = true
 
