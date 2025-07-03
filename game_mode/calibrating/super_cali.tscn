@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmq1da2ppfygq"]
+
+[ext_resource type="Script" uid="uid://cmispg3vcjrd" path="res://game_mode/calibrating/super_cali.gd" id="1_26idv"]
+
+[node name="SuperCali" type="Node"]
+script = ExtResource("1_26idv")
