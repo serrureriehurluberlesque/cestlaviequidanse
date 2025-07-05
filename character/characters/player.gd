@@ -67,7 +67,7 @@ func _unhandled_input(event):
 			rotation_target = (orientation_target - move_target).angle()
 			update_ghost()
 	for i in range(1,5):
-		if event.is_action_pressed("action%d" % [i]):
+		if event.is_action_pressed("action%d" % [i]) and i in action_matching:
 			select_action(action_matching[i])
 
 func set_selection_step(step):
