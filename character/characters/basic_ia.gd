@@ -24,7 +24,7 @@ func _start_selecting_action(actions, position, angle, team):
 		var rotation_diff = abs(wrapf(rotation_to_target - angle, -PI, PI))
 
 		# 2. Filtrer les actions selon la position et la rotation requises
-		var valid_actions = actions.filter(func(action):
+		var valid_actions = actions.values().filter(func(action):
 			return (
 				distance < action.expected_position_range() and
 				rotation_diff < action.expected_rotation_range()
@@ -42,13 +42,9 @@ func _start_selecting_action(actions, position, angle, team):
 			var optimal_distance = best_action.optimal_distance()
 			move_target = target_position - direction * optimal_distance
 			rotation_target = rotation_to_target
-			action_name = best_action.name
+			selected_action = best_action
 		else:
 			# Si aucune action valable, comportement fallback
-			move_target = position
-			rotation_target = angle
-			action_name = "LightAttack"
-	else:
-		move_target = position
-		rotation_target = angle
-		action_name = "LightAttack"
+			move_target = target_position - direction * 300.0
+			rotation_target = rotation_to_target
+			selected_action = actions["Move"]

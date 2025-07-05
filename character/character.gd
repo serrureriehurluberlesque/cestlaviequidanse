@@ -105,10 +105,10 @@ func _physics_process(delta: float) -> void:
 
 
 func start_round():
-	decider.start_selecting_action(get_actions().values(), get_position(), (get_rotation() - SPRITE_ROTATION), team)
+	decider.start_selecting_action(get_actions(), get_position(), (get_rotation() - SPRITE_ROTATION), team)
 
 func end_selection():
-	decider.end_selecting_action(get_actions().values(), get_position(), (get_rotation() - SPRITE_ROTATION), team)
+	decider.end_selecting_action(get_actions(), get_position(), (get_rotation() - SPRITE_ROTATION), team)
 
 func start_fast_activations():
 	if action.has_fast_activation:
@@ -125,9 +125,6 @@ func start_slow_activations():
 
 func end_round():
 	unstack_damage()
-
-func get_action(action_name):
-	return actions.get_node(str(action_name))
 
 func get_actions():
 	var dict_of_actions = {}
@@ -160,23 +157,24 @@ func unstack_damage():
 		queue_free()
 
 func select_action(selected_action, selected_move_target, selected_rotation_target):
-	action = get_action(selected_action)
-	move_target = selected_move_target
-	rotation_target = selected_rotation_target
-	
-	rotation_target += SPRITE_ROTATION
-	move_speed = action.move_range
-	orientation_speed = action.orientation_range
-
-func update_ghost(selected_action, move_target, rotation_target):
 	if selected_action:
+		action = selected_action
+		move_target = selected_move_target
+		rotation_target = selected_rotation_target
+		
+		rotation_target += SPRITE_ROTATION
+		move_speed = action.move_range
+		orientation_speed = action.orientation_range
+
+func update_ghost(selected_action_name, move_target, rotation_target):
+	if selected_action_name:
 		ghost.set_position((move_target - get_position()).rotated(-(get_rotation() - SPRITE_ROTATION) - PI/2))
 		ghost.set_rotation(rotation_target - (get_rotation() - SPRITE_ROTATION))
 		ghost.show()
 	else:
 		ghost.hide()
 	for action in get_actions():
-		if action == (selected_action if selected_action else ""):
+		if action == selected_action_name:
 			ghost_hitboxes[action].show()
 		else:
 			ghost_hitboxes[action].hide()

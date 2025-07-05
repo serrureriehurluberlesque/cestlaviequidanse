@@ -4,7 +4,7 @@ extends Node2D
 signal updated_ghost(action_name, move_target, rotation_target)
 signal action_selected(action_name, move_target, rotation_target)
 
-var action_name: String
+var selected_action: Action
 var move_target: Vector2
 var rotation_target: float
 
@@ -19,9 +19,9 @@ func _start_selecting_action(actions, position, angle, team):
 
 func end_selecting_action(actions, position, angle, team):
 	_end_selecting_action(actions, position, angle, team)
-	action_selected.emit(action_name, move_target, rotation_target)
+	action_selected.emit(selected_action, move_target, rotation_target)
 	
-	action_name = ""
+	selected_action = null
 	update_ghost()
 
 
@@ -30,4 +30,4 @@ func _end_selecting_action(actions, position, angle, team):
 
 
 func update_ghost():
-	updated_ghost.emit(action_name, move_target, rotation_target)
+	updated_ghost.emit(selected_action.name if selected_action else "", move_target, rotation_target)
