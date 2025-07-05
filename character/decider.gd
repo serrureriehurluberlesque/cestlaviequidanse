@@ -2,7 +2,7 @@ class_name Decider
 extends Node2D
 
 signal updated_ghost(action_name, move_target, rotation_target)
-signal selected_action(action_name, move_target, rotation_target)
+signal action_selected(action_name, move_target, rotation_target)
 
 var action_name: String
 var move_target: Vector2
@@ -19,7 +19,7 @@ func _start_selecting_action(actions, position, angle, team):
 
 func end_selecting_action(actions, position, angle, team):
 	_end_selecting_action(actions, position, angle, team)
-	selected_action.emit(action_name, move_target, rotation_target)
+	action_selected.emit(action_name, move_target, rotation_target)
 	
 	action_name = ""
 	update_ghost()

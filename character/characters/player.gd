@@ -85,14 +85,14 @@ func select_action(action):
 	if not is_selection_step(SelectionSteps.NONE):
 		if selected_action:
 			unselect_action(selected_action)
-		actions_ui.get_node(action.name).set_pressed_no_signal(true)
+		actions_ui.get_node(str(action.name)).set_pressed_no_signal(true)
 		selected_action = action
 		selected_action_name = action.name
 		action_name = selected_action_name
 		set_selection_step(SelectionSteps.POSITION)
 
 func unselect_action(action):
-	actions_ui.get_node(action.name).set_pressed_no_signal(false)
+	actions_ui.get_node(str(action.name)).set_pressed_no_signal(false)
 	selected_action = null
 	selected_action_name = ""
 

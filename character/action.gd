@@ -34,7 +34,7 @@ func get_hitbox_ghost():
 
 func expected_position_range() -> float:
 	var hitbox_y = abs(hitbox.position.y)
-	var shape = hitbox.get_shape()
+	var shape = hitbox.get_node("Shape")
 	var hitbox_height = 0.0
 	if shape and shape.has_method("get_rect"):
 		hitbox_height = shape.get_rect().size.y
