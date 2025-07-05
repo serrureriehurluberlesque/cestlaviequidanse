@@ -44,6 +44,8 @@ func _ready() -> void:
 	$Control/LifeBar.max_value = max_health_points
 	$Control/LifeBarDamage.max_value = max_health_points
 	update_lifebar()
+	
+	action = get_actions()["Move"]
 
 
 func _physics_process(delta: float) -> void:
