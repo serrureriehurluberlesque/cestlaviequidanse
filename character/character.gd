@@ -184,6 +184,7 @@ func update_ghost(selected_action_name, move_target, rotation_target):
 				selected_action.orientation_range * Action.ORIENTATION_RANGE_MULTIPLIER * 2,
 				ghost_pos,
 				- SPRITE_ROTATION,
+				128.0,
 			)
 			range_indicator.show()
 	else:
