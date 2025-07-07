@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bohkd3ilffj53"]
+[gd_scene load_steps=4 format=3 uid="uid://bohkd3ilffj53"]
 
 [ext_resource type="PackedScene" uid="uid://cg7lm7bqobbcv" path="res://character/character.tscn" id="1_1b0ac"]
 [ext_resource type="Script" uid="uid://bmjjrcip2stoo" path="res://character/characters/player.gd" id="2_kfao2"]
+[ext_resource type="Script" uid="uid://dkkltsxj0el6q" path="res://character/characters/range_indicator.gd" id="3_8fbdo"]
 
-[node name="Player" instance=ExtResource("1_1b0ac")]
+[node name="Player" node_paths=PackedStringArray("range_indicator") instance=ExtResource("1_1b0ac")]
+range_indicator = NodePath("Decider/RangeIndicator")
 
 [node name="Decider" parent="." index="2"]
 script = ExtResource("2_kfao2")
@@ -75,3 +77,7 @@ mouse_filter = 2
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
+
+[node name="RangeIndicator" type="Node2D" parent="Decider" index="2"]
+z_index = 10
+script = ExtResource("3_8fbdo")

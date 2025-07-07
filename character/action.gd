@@ -1,9 +1,8 @@
 class_name Action
 extends Node2D
 
-# Multiplicateurs pour les portées (adapté à tes besoins, valeurs fixes ici)
 const MOVE_RANGE_MULTIPLIER = 128.0
-const ORIENTATION_RANGE_MULTIPLIER = PI / 2
+const ORIENTATION_RANGE_MULTIPLIER = PI/2.0
 
 @export var move_range:= 1.0
 @export var orientation_range:= 1.0

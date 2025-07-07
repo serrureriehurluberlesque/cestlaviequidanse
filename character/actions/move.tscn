@@ -4,5 +4,5 @@
 
 [node name="Move" instance=ExtResource("1_vsksi")]
 move_range = 3.0
-orientation_range = 1.5
+orientation_range = 3.0
 damage = 0.0

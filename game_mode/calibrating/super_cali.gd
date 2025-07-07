@@ -7,7 +7,7 @@ var calibrating: Calibrating
 var values
 
 var unit_pos = 128.0
-var unit_rot = PI/2
+var unit_rot = PI/2.0
 
 func _ready() -> void:
 	test_values(Vector2(10000.0, 0.0), 0.0, 1.0, 1.0)

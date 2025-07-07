@@ -7,6 +7,7 @@ size = Vector2(120, 80)
 
 [node name="LightAttack" instance=ExtResource("1_vsksi")]
 move_range = 1.5
+orientation_range = 1.9
 has_slow_activation = true
 
 [node name="Hitbox" parent="." index="0"]

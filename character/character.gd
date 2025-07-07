@@ -2,15 +2,17 @@ class_name Character
 extends RigidBody2D
 
 const SPEED = 72.0
-const RSPEED = 1.35
+const RSPEED = 0.75
 const SPRITE_ROTATION = PI / 2
 
 @export var max_health_points:= 100.0
 @export var team:= 1
+@export var range_indicator : Node2D
 
 @onready var actions := $Actions as Node2D
 @onready var decider := $Decider as Decider
 @onready var health_points := max_health_points
+
 var ghost: Node2D
 var ghost_hitboxes = {}
 var damage_stack: Array[float] = []
@@ -170,11 +172,25 @@ func select_action(selected_action, selected_move_target, selected_rotation_targ
 
 func update_ghost(selected_action_name, move_target, rotation_target):
 	if selected_action_name:
+		var ghost_pos = (move_target - get_position()).rotated(-(get_rotation() - SPRITE_ROTATION) - PI/2)
 		ghost.set_position((move_target - get_position()).rotated(-(get_rotation() - SPRITE_ROTATION) - PI/2))
 		ghost.set_rotation(rotation_target - (get_rotation() - SPRITE_ROTATION))
 		ghost.show()
+		
+		if range_indicator:
+			var selected_action = get_actions()[selected_action_name]
+			range_indicator.update_ranges(
+				selected_action.move_range * Action.MOVE_RANGE_MULTIPLIER,
+				selected_action.orientation_range * Action.ORIENTATION_RANGE_MULTIPLIER * 2,
+				ghost_pos,
+				- SPRITE_ROTATION,
+			)
+			range_indicator.show()
 	else:
 		ghost.hide()
+		if range_indicator:
+			range_indicator.hide()
+	
 	for action in get_actions():
 		if action == selected_action_name:
 			ghost_hitboxes[action].show()
