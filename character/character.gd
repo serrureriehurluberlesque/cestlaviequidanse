@@ -151,8 +151,14 @@ func update_lifebar():
 	$Control/LifeBar.set_value(health_points)
 
 func unstack_damage():
+	var total_damage = 0.0
 	for damage in damage_stack:
 		health_points -= damage
+		total_damage += damage
+	
+	if total_damage > 0.5:
+		$Blood.amount = total_damage * 5
+		$Blood.restart()
 	
 	update_lifebar()
 	damage_stack = []
