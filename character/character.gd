@@ -115,7 +115,7 @@ func end_selection():
 	decider.end_selecting_action(get_actions(), get_position(), (get_rotation() - SPRITE_ROTATION), team)
 
 func start_fast_activations():
-	if action.has_fast_activation:
+	if action and action.has_fast_activation:
 		do_attack_activation()
 
 func start_move_activations():
@@ -124,7 +124,7 @@ func start_move_activations():
 func start_slow_activations():
 	is_moving = false
 	
-	if action.has_slow_activation:
+	if action and action.has_slow_activation:
 		do_attack_activation()
 
 func end_round():
@@ -165,6 +165,10 @@ func unstack_damage():
 	
 	if health_points <= 0.0:
 		queue_free()
+	else:
+		action = null
+		move_target = Vector2.ZERO
+		rotation_target = 0
 
 func select_action(selected_action, selected_move_target, selected_rotation_target):
 	if selected_action:
@@ -175,6 +179,13 @@ func select_action(selected_action, selected_move_target, selected_rotation_targ
 		rotation_target += SPRITE_ROTATION
 		move_speed = action.move_range
 		orientation_speed = action.orientation_range
+	else:
+		move_target = get_position()
+		rotation_target = get_rotation()
+		
+		move_speed = 0.0
+		orientation_speed = 0.0
+		
 
 func update_ghost(selected_action_name, move_target, rotation_target):
 	if selected_action_name:

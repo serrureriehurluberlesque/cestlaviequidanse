@@ -105,9 +105,6 @@ func _start_selecting_action(actions, position, angle, team):
 func _end_selecting_action(actions, position, angle, team):
 	if selected_action:
 		unselect_action(selected_action, false)
-	else:
-		move_target = position
-		rotation_target = angle
 	set_selection_step(SelectionSteps.NONE)
 	selection_ui.hide()
 	remove_buttons()
