@@ -25,8 +25,35 @@ func _ready() -> void:
 		print("Starting arena %s" % [name])
 	
 	await get_tree().create_timer(2.0).timeout
+	$UI/Control.show()
 	
 	_start_round()
+
+
+func _process(delta: float) -> void:
+	if not action_selection_timer.is_stopped():
+		update_timer([action_selection_timer], false)
+	else:
+		update_timer([fast_activation_timer, move_activation_timer, slow_activation_timer], true)
+
+
+func update_timer(timers, reversed):
+	var time_left = 0.0
+	var wait_time = 0.0
+	var running = false
+	for timer in timers:
+		if not timer.is_stopped():
+			running = true
+		if running:
+			if timer.is_stopped():
+				time_left += timer.wait_time
+			else:
+				time_left += timer.time_left
+		wait_time += timer.wait_time
+	if reversed:
+		time_left = wait_time - time_left
+	$UI/Control/Timer.set_value(time_left / wait_time)
+	
 
 
 func _start_round():
@@ -41,6 +68,8 @@ func _start_round():
 func _end_selection():
 	if OS.is_debug_build():
 		print("Ending selection of round %d" % [actual_round_number])
+	
+	$UI/Control/Timer.set_value(0.0)
 	
 	arena_says("end_selection")
 	_start_fast_activation()
