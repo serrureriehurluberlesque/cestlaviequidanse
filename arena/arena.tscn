@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://gvgiv8v0wn45"]
+[gd_scene load_steps=4 format=3 uid="uid://gvgiv8v0wn45"]
 
 [ext_resource type="Script" uid="uid://cpwuyuss0b1j4" path="res://arena/arena.gd" id="1_dkqtx"]
 [ext_resource type="Texture2D" uid="uid://bd65sh4qbommr" path="res://arena/ground.png" id="2_u13ga"]
+[ext_resource type="PackedScene" uid="uid://bohkd3ilffj53" path="res://character/characters/player.tscn" id="3_dotur"]
 
 [node name="Arena" type="Node2D"]
 script = ExtResource("1_dkqtx")
@@ -15,6 +16,8 @@ region_rect = Rect2(0, 0, 4096, 2048)
 region_filter_clip_enabled = true
 
 [node name="Characters" type="Node2D" parent="."]
+
+[node name="Player" parent="Characters" instance=ExtResource("3_dotur")]
 
 [node name="ActionSelectionTimer" type="Timer" parent="."]
 wait_time = 3.0

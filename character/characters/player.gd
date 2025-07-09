@@ -1,6 +1,8 @@
 class_name Player
 extends Decider
 
+signal drop_camera(pos)
+
 enum SelectionSteps {
 	NONE,
 	ACTION,
@@ -108,3 +110,7 @@ func _end_selecting_action(actions, position, angle, team):
 	set_selection_step(SelectionSteps.NONE)
 	selection_ui.hide()
 	remove_buttons()
+
+
+func _die(pos):
+	drop_camera.emit(pos)

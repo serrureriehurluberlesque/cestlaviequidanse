@@ -29,5 +29,13 @@ func _end_selecting_action(actions, position, angle, team):
 	pass
 
 
+func die(pos):
+	_die(pos)
+
+
+func _die(pos):
+	pass
+
+
 func update_ghost():
 	updated_ghost.emit(selected_action.name if selected_action else "", move_target, rotation_target)

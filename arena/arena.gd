@@ -19,6 +19,7 @@ func _ready() -> void:
 	move_activation_timer.connect("timeout", _start_slow_activation)
 	slow_activation_timer.connect("timeout", _end_round)
 	
+	$Characters/Player.decider.connect("drop_camera", _drop_camera)
 	
 	if OS.is_debug_build():
 		print("Starting arena %s" % [name])
@@ -102,3 +103,9 @@ func get_characters():
 func arena_says(function):
 	for character in get_characters():
 		character.call(function)
+
+
+func _drop_camera(pos):
+	var cam = Camera2D.new()
+	add_child(cam)
+	cam.set_position(pos)

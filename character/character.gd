@@ -164,6 +164,7 @@ func unstack_damage():
 	damage_stack = []
 	
 	if health_points <= 0.0:
+		decider.die(get_position())
 		queue_free()
 	else:
 		action = null
