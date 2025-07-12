@@ -4,6 +4,7 @@ extends Node2D
 const MOVE_RANGE_MULTIPLIER = 128.0
 const ORIENTATION_RANGE_MULTIPLIER = PI/2.0
 
+@export var weapon_type := WeaponSprite.WeaponTypes.MOVE
 @export var move_range:= 1.0
 @export var orientation_range:= 1.0
 @export var damage:= 10.0
@@ -12,9 +13,13 @@ const ORIENTATION_RANGE_MULTIPLIER = PI/2.0
 
 @onready var hitbox := $Hitbox as Area2D
 @onready var animation_time := $AnimationTime as Timer
+@onready var weapon_sprite := $Hitbox/WeaponSprite as WeaponSprite
 
 func _ready() -> void:
 	animation_time.connect("timeout", _stop_animation)
+	
+	weapon_sprite.set_size($Hitbox/Shape.shape.size)
+	weapon_sprite.set_weapon(weapon_type)
 
 func get_hitted_targets():
 	return hitbox.get_overlapping_bodies()

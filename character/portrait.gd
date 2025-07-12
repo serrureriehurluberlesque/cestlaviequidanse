@@ -1,7 +1,7 @@
 class_name Portrait
 extends Node2D
 
-var SPRITE_HEIGHT = 128.0
+const SPRITE_HEIGHT = 128.0
 
 var max_value: float
 

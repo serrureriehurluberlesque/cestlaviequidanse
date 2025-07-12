@@ -6,6 +6,7 @@
 size = Vector2(160, 160)
 
 [node name="MediumAttack" instance=ExtResource("1_8v46k")]
+weapon_type = 1
 move_range = 0.5
 orientation_range = 1.9
 damage = 15.0

@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://brrts4nchl7ga"]
+[gd_scene load_steps=5 format=3 uid="uid://brrts4nchl7ga"]
 
 [ext_resource type="Script" uid="uid://dgrpj6k4h3qob" path="res://character/action.gd" id="1_c7mkc"]
+[ext_resource type="Script" uid="uid://cri47lx6kmmau" path="res://character/weapon_sprite.gd" id="2_edakb"]
+[ext_resource type="Texture2D" uid="uid://dqlfvgl6srysa" path="res://character/actions/assets/area.png" id="2_jr8xk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c7mkc"]
 
@@ -11,6 +13,14 @@ script = ExtResource("1_c7mkc")
 
 [node name="Shape" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_c7mkc")
+
+[node name="WeaponSprite" type="Node2D" parent="Hitbox"]
+script = ExtResource("2_edakb")
+
+[node name="Border" type="Sprite2D" parent="Hitbox/WeaponSprite"]
+texture = ExtResource("2_jr8xk")
+
+[node name="Sprite" type="Sprite2D" parent="Hitbox/WeaponSprite"]
 
 [node name="AnimationTime" type="Timer" parent="."]
 wait_time = 0.4
