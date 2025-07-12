@@ -1,9 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://cg7lm7bqobbcv"]
+[gd_scene load_steps=19 format=3 uid="uid://cg7lm7bqobbcv"]
 
 [ext_resource type="Script" uid="uid://bpaf87rq76s1h" path="res://character/character.gd" id="1_yf0e5"]
-[ext_resource type="Texture2D" uid="uid://djb0dthv153rr" path="res://character/assets/default.png" id="2_tgjim"]
+[ext_resource type="Script" uid="uid://46fw2h0ggmkt" path="res://character/portrait.gd" id="2_gx66j"]
+[ext_resource type="Texture2D" uid="uid://b3qfd33sf8b5y" path="res://character/assets/character_background.png" id="2_qkjfd"]
+[ext_resource type="Texture2D" uid="uid://bfjjqmhpntfkq" path="res://character/assets/character_dead.png" id="3_dy06j"]
 [ext_resource type="PackedScene" uid="uid://c0cttyv7mx1il" path="res://character/actions/move.tscn" id="3_hx151"]
 [ext_resource type="PackedScene" uid="uid://2h3y1mq5pcpl" path="res://character/actions/heavy_attack.tscn" id="4_0rvpn"]
+[ext_resource type="Texture2D" uid="uid://0t4m3cse1138" path="res://character/assets/character.png" id="4_qkjfd"]
 [ext_resource type="PackedScene" uid="uid://btar1h47so2u3" path="res://character/actions/light_attack.tscn" id="4_tgjim"]
 [ext_resource type="PackedScene" uid="uid://gn10klvgm7qn" path="res://character/actions/medium_attack.tscn" id="5_0rvpn"]
 [ext_resource type="Script" uid="uid://o33r22yt5ntx" path="res://character/decider.gd" id="6_o6jyn"]
@@ -13,8 +16,14 @@
 friction = 0.1
 bounce = 0.7
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_o6jyn"]
-points = PackedVector2Array(-64, -50, -50, -64, 50, -64, 64, -50, 64, 50, 50, 64, -50, 64, -64, 50)
+[sub_resource type="CircleShape2D" id="CircleShape2D_gx66j"]
+radius = 64.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gx66j"]
+atlas = ExtResource("2_qkjfd")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8brn5"]
+atlas = ExtResource("4_qkjfd")
 
 [sub_resource type="Gradient" id="Gradient_wy5t8"]
 offsets = PackedFloat32Array(0, 0.75, 0.991935)
@@ -47,11 +56,29 @@ linear_damp_mode = 1
 script = ExtResource("1_yf0e5")
 
 [node name="Body" type="CollisionShape2D" parent="."]
-shape = SubResource("ConvexPolygonShape2D_o6jyn")
+shape = SubResource("CircleShape2D_gx66j")
 
-[node name="Sprite2D" type="Sprite2D" parent="Body"]
-modulate = Color(1, 1, 1, 0.490196)
-texture = ExtResource("2_tgjim")
+[node name="Sprite2D" type="Node2D" parent="Body"]
+
+[node name="Portrait" type="Node2D" parent="Body/Sprite2D"]
+script = ExtResource("2_gx66j")
+
+[node name="BackgroundDead" type="Sprite2D" parent="Body/Sprite2D/Portrait"]
+modulate = Color(0.136826, 0.136826, 0.136826, 1)
+texture = ExtResource("2_qkjfd")
+
+[node name="CharacterDead" type="Sprite2D" parent="Body/Sprite2D/Portrait"]
+texture = ExtResource("3_dy06j")
+
+[node name="Background" type="Sprite2D" parent="Body/Sprite2D/Portrait"]
+texture = SubResource("AtlasTexture_gx66j")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="Character" type="Sprite2D" parent="Body/Sprite2D/Portrait"]
+texture = SubResource("AtlasTexture_8brn5")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
 
 [node name="Actions" type="Node2D" parent="."]
 
@@ -75,6 +102,7 @@ explosiveness = 0.5
 process_material = SubResource("ParticleProcessMaterial_wy5t8")
 
 [node name="Control" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -64.0

@@ -8,10 +8,16 @@ const SPRITE_ROTATION = PI / 2
 @export var max_health_points:= 100.0
 @export var team:= 1
 @export var range_indicator : Node2D
+@export var color_override : Color
 
 @onready var actions := $Actions as Node2D
 @onready var decider := $Decider as Decider
 @onready var health_points := max_health_points
+
+var team_colors = {
+	1: Color(0, 0, 1),
+	2: Color(1, 0, 0),
+}
 
 var ghost: Node2D
 var ghost_hitboxes = {}
@@ -23,6 +29,14 @@ var move_speed: float
 var orientation_speed: float
 var is_moving: bool
 
+
+func get_color() -> Color:
+	if color_override:
+		return color_override
+	else:
+		return team_colors[team]
+
+
 func _ready() -> void:
 	for a in actions.get_children():
 		a.hide()
@@ -30,8 +44,18 @@ func _ready() -> void:
 	decider.connect("action_selected", select_action)
 	decider.connect("updated_ghost", update_ghost)
 	
+
+	$Body/Sprite2D/Portrait.set_max_value(max_health_points)
+	$Body/Sprite2D/Portrait.set_color(get_color())
+	
+	$Control/LifeBar.max_value = max_health_points
+	$Control/LifeBarDamage.max_value = max_health_points
+	update_lifebar()
+	
 	ghost = $Body/Sprite2D.duplicate()
 	$Body.add_child(ghost)
+	ghost.modulate.a = 0.5
+	ghost.get_node("Portrait").clean()
 	ghost.hide()
 	for action in get_actions().values():
 		var ghost_hitbox = action.get_hitbox_ghost()
@@ -42,10 +66,6 @@ func _ready() -> void:
 
 		ghost_hitbox.hide()
 		ghost_hitboxes[action.name] = ghost_hitbox
-
-	$Control/LifeBar.max_value = max_health_points
-	$Control/LifeBarDamage.max_value = max_health_points
-	update_lifebar()
 	
 	action = get_actions()["Move"]
 
@@ -148,6 +168,8 @@ func hurt(damage):
 	$Control/LifeBarDamage.set_value($Control/LifeBarDamage.get_value() - damage)
 
 func update_lifebar():
+	$Body/Sprite2D/Portrait.set_value(health_points)
+	
 	$Control/LifeBar.set_value(health_points)
 
 func unstack_damage():
