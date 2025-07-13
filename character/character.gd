@@ -54,7 +54,7 @@ func _ready() -> void:
 	
 	ghost = $Body/Sprite2D.duplicate()
 	$Body.add_child(ghost)
-	ghost.modulate.a = 0.5
+	ghost.modulate.a = 0.8
 	ghost.get_node("Portrait").clean()
 	ghost.hide()
 	for action in get_actions().values():

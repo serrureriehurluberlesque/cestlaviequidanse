@@ -9,7 +9,7 @@ var sprite_size: float = 0.0
 func _draw():
 	# Cercle de déplacement
 	if move_range > 0:
-		draw_circle(Vector2.ZERO, move_range, Color(0, 1, 0, 0.15))
+		draw_circle(Vector2.ZERO, move_range, Color(0, 1, 0, 0.10))
 	# Arc d’orientation
 	if orientation_range > 0:
 		var arc_radius = sprite_size * 1.5
