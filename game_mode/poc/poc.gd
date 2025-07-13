@@ -29,8 +29,7 @@ func _on_arena_finished(is_won) -> void:
 	if is_won:
 		level += 1
 		if level >= 6:
-			splash_screen.start("res://gui/assets/fin.png")
-			splash_screen.disconnect("screen_passed", _on_splash_screen_screen_passed)
+			splash_screen.start("res://gui/assets/fin.png", "", false)
 		else:
 			splash_screen.start("res://gui/assets/win.png")  # , "You win! Start the next level?")
 	else:

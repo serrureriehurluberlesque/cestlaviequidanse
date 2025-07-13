@@ -46,7 +46,8 @@ func _unhandled_input(event):
 			set_selection_step(SelectionSteps.ROTATION)
 		elif not event.pressed and is_selection_step(SelectionSteps.ROTATION):
 			var orientation_target = mouse_event_to_game(event.position)
-			rotation_target = (orientation_target - move_target).angle()
+			if (orientation_target - move_target).length() > 0.0001:
+				rotation_target = (orientation_target - move_target).angle()
 			set_selection_step(SelectionSteps.SELECTED)
 	elif event is InputEventMouseMotion:
 		if is_selection_step(SelectionSteps.ACTION):
@@ -56,7 +57,8 @@ func _unhandled_input(event):
 			update_ghost()
 		elif is_selection_step(SelectionSteps.ROTATION):
 			var orientation_target = mouse_event_to_game(event.position)
-			rotation_target = (orientation_target - move_target).angle()
+			if (orientation_target - move_target).length() > 0.0001:
+				rotation_target = (orientation_target - move_target).angle()
 			update_ghost()
 	for i in range(1,5):
 		if event.is_action_pressed("action%d" % [i]) and i in action_matching:
