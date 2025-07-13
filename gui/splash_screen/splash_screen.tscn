@@ -1,13 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bpmg8ht0jwva4"]
+[gd_scene load_steps=2 format=3 uid="uid://bpmg8ht0jwva4"]
 
 [ext_resource type="Script" uid="uid://cyp37jo4n4515" path="res://gui/splash_screen/splash_screen.gd" id="1_4jifb"]
-[ext_resource type="Texture2D" uid="uid://bqyqc33dveb31" path="res://gui/assets/default_icon_normal.png" id="1_rv1pt"]
-[ext_resource type="Texture2D" uid="uid://c8vc4pdgyxthr" path="res://gui/assets/default_icon_pressed.png" id="2_sghkl"]
-[ext_resource type="Texture2D" uid="uid://ba6kfa6ao4byh" path="res://gui/assets/default_icon_hover.png" id="3_uocre"]
 
 [node name="SplashScreen" type="TextureButton"]
 visible = false
-self_modulate = Color(0.454524, 0.454524, 0.454524, 1)
+self_modulate = Color(0.683077, 0.683077, 0.683077, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -15,20 +12,18 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture_normal = ExtResource("1_rv1pt")
-texture_pressed = ExtResource("2_sghkl")
-texture_hover = ExtResource("3_uocre")
 stretch_mode = 0
 script = ExtResource("1_4jifb")
 
 [node name="Text" type="RichTextLabel" parent="."]
+self_modulate = Color(0, 0, 0, 1)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_bottom = 300.0
 grow_horizontal = 2
-grow_vertical = 2
 mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
 text = "Test"
 horizontal_alignment = 1

@@ -1,5 +1,5 @@
 class_name SplashScreen
-extends Control
+extends TextureButton
 
 signal screen_passed(text)
 
@@ -19,6 +19,7 @@ func _on_pressed() -> void:
 	text.set_text("")
 
 
-func start(init_text := ""):
+func start(path, init_text := ""):
 	show()
+	texture_normal = load(path)
 	text.set_text(init_text)
