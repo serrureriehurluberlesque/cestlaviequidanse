@@ -20,4 +20,7 @@ mouse_filter = 2
 [node name="SplashScreen" parent="Gui" instance=ExtResource("2_0ylbl")]
 layout_mode = 1
 
+[node name="LevelSplashScreen" parent="Gui" instance=ExtResource("2_0ylbl")]
+layout_mode = 1
+
 [node name="World" type="Node2D" parent="."]

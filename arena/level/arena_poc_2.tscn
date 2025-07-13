@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://di0l8w6i7y0tc"]
+
+[ext_resource type="PackedScene" uid="uid://gvgiv8v0wn45" path="res://arena/arena.tscn" id="1_2f33f"]
+[ext_resource type="PackedScene" uid="uid://d1mgj6sdpkfg8" path="res://character/characters/soldat.tscn" id="2_6adjh"]
+
+[node name="Arena" instance=ExtResource("1_2f33f")]
+TITLE = "II. La trahison"
+
+[node name="Player" parent="Characters" index="0"]
+rotation = 1.45533
+
+[node name="Salaud" parent="Characters" index="1" instance=ExtResource("2_6adjh")]
+position = Vector2(-270, 9)
+rotation = 1.59121
+team = 2

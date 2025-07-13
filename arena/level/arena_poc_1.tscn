@@ -4,10 +4,17 @@
 [ext_resource type="PackedScene" uid="uid://d1mgj6sdpkfg8" path="res://character/characters/soldat.tscn" id="3_137v4"]
 
 [node name="ArenaPoc1" instance=ExtResource("1_pigfl")]
+TITLE = "I. La mise à mal"
 
-[node name="Soldat6" parent="Characters" index="0" instance=ExtResource("3_137v4")]
-position = Vector2(494, -49)
+[node name="Salaud" parent="Characters" index="0" instance=ExtResource("3_137v4")]
+position = Vector2(-294, -217)
+rotation = 0.247744
+
+[node name="Amal" parent="Characters" index="1" instance=ExtResource("3_137v4")]
+position = Vector2(292, -29)
+rotation = -1.5606
 team = 2
 
-[node name="Player" parent="Characters" index="1"]
-position = Vector2(-232, -63)
+[node name="Player" parent="Characters" index="2"]
+position = Vector2(-59, -21)
+rotation = 1.62184

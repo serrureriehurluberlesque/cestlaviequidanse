@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://cb50yk3wop87r"]
+
+[ext_resource type="PackedScene" uid="uid://gvgiv8v0wn45" path="res://arena/arena.tscn" id="1_bbxaj"]
+[ext_resource type="PackedScene" uid="uid://d1mgj6sdpkfg8" path="res://character/characters/soldat.tscn" id="2_a3dq5"]
+
+[node name="Arena" instance=ExtResource("1_bbxaj")]
+TITLE = "III. L'alliance"
+
+[node name="Player" parent="Characters" index="0"]
+position = Vector2(-234, 0)
+rotation = 1.5451
+
+[node name="Salaud 1" parent="Characters" index="1" instance=ExtResource("2_a3dq5")]
+position = Vector2(-312, -304)
+rotation = 1.95236
+
+[node name="Salaud 2" parent="Characters" index="2" instance=ExtResource("2_a3dq5")]
+position = Vector2(-279, 304)
+rotation = 1.26136
+
+[node name="Soldat" parent="Characters" index="3" instance=ExtResource("2_a3dq5")]
+position = Vector2(405, 55)
+rotation = -1.56286
+team = 2
+
+[node name="Soldat2" parent="Characters" index="4" instance=ExtResource("2_a3dq5")]
+position = Vector2(405, 205)
+rotation = -1.56286
+team = 2
+
+[node name="Soldat3" parent="Characters" index="5" instance=ExtResource("2_a3dq5")]
+position = Vector2(403, -251)
+rotation = -1.56286
+team = 2
+
+[node name="Soldat4" parent="Characters" index="6" instance=ExtResource("2_a3dq5")]
+position = Vector2(405, -99)
+rotation = -1.56286
+team = 2

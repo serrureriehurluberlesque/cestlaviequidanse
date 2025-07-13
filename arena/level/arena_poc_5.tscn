@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://625207ivdwj"]
+
+[ext_resource type="PackedScene" uid="uid://gvgiv8v0wn45" path="res://arena/arena.tscn" id="1_xsc2k"]
+[ext_resource type="PackedScene" uid="uid://d1mgj6sdpkfg8" path="res://character/characters/soldat.tscn" id="2_gu4sa"]
+
+[node name="Arena" instance=ExtResource("1_xsc2k")]
+TITLE = "V. Bonne chance"
+
+[node name="Player" parent="Characters" index="0"]
+position = Vector2(76, 0)
+rotation = 1.57671
+
+[node name="UnVraiPote" parent="Characters" index="1" instance=ExtResource("2_gu4sa")]
+position = Vector2(-72, -1)
+rotation = -1.57487
+
+[node name="Soldat" parent="Characters" index="2" instance=ExtResource("2_gu4sa")]
+position = Vector2(2, 423)
+team = 2
+
+[node name="Soldat2" parent="Characters" index="3" instance=ExtResource("2_gu4sa")]
+position = Vector2(-546, 183)
+rotation = 1.20711
+team = 2
+
+[node name="Soldat3" parent="Characters" index="4" instance=ExtResource("2_gu4sa")]
+position = Vector2(-341, -376)
+rotation = 2.53345
+team = 2
+
+[node name="Soldat4" parent="Characters" index="5" instance=ExtResource("2_gu4sa")]
+position = Vector2(349, -386)
+rotation = -2.55774
+team = 2
+
+[node name="Soldat5" parent="Characters" index="6" instance=ExtResource("2_gu4sa")]
+position = Vector2(512, 185)
+rotation = -1.20006
+team = 2

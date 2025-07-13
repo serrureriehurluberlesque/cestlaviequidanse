@@ -164,7 +164,7 @@ func do_attack_activation():
 	action.start_animation()
 	
 	for target in action.get_hitted_targets():
-		if target != self:
+		if target != self and "hurt" in target:
 			target.hurt(action.damage)
 
 func hurt(damage):

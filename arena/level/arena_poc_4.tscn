@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://me85m7i55k2p"]
+
+[ext_resource type="PackedScene" uid="uid://gvgiv8v0wn45" path="res://arena/arena.tscn" id="1_kipr7"]
+[ext_resource type="PackedScene" uid="uid://d1mgj6sdpkfg8" path="res://character/characters/soldat.tscn" id="2_616ft"]
+
+[node name="Arena" instance=ExtResource("1_kipr7")]
+TITLE = "IV. Encore une trahison, faut mieux choisir tes alliés"
+
+[node name="Player" parent="Characters" index="0"]
+position = Vector2(8, -29)
+
+[node name="Salaud 1" parent="Characters" index="1" instance=ExtResource("2_616ft")]
+position = Vector2(-215, 13)
+rotation = 1.57596
+team = 2
+
+[node name="Salaud 2" parent="Characters" index="2" instance=ExtResource("2_616ft")]
+position = Vector2(237, 11)
+rotation = -1.56023
+team = 2

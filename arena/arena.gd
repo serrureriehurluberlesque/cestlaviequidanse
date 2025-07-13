@@ -3,16 +3,19 @@ extends Node2D
 
 signal ended(won)
 
-@export var ROUND_TOTAL_NUMBER = 10
+@export var ROUND_TOTAL_NUMBER = 40
+@export var TITLE = "Arena"
 
 @onready var action_selection_timer := $ActionSelectionTimer as Timer
 @onready var fast_activation_timer := $FastActionTimer as Timer
 @onready var move_activation_timer := $MoveActionTimer as Timer
 @onready var slow_activation_timer := $SlowActionTimer as Timer
 @onready var characters := $Characters as Node2D
+
 var actual_round_number := 0
 
 
+	
 func _ready() -> void:
 	action_selection_timer.connect("timeout", _end_selection)
 	fast_activation_timer.connect("timeout", _start_move_activation)
@@ -104,9 +107,7 @@ func _end_round():
 	
 	arena_says("end_round")
 	
-	if actual_round_number >= ROUND_TOTAL_NUMBER:
-		_ended()
-	else:
+	if not _ended():
 		_start_round()
 
 
@@ -120,9 +121,15 @@ func _ended():
 	
 	var is_won = team_scores[1] > team_scores[2]
 	
-	if OS.is_debug_build():
-		print("Ending, arena won" if is_won else "Ending, arena lost")
-	ended.emit(is_won)
+	var some_team_is_dead = false
+	for score in team_scores.values():
+		if score <= 0.001:
+			some_team_is_dead = true
+	
+	if actual_round_number >= ROUND_TOTAL_NUMBER or some_team_is_dead:
+		if OS.is_debug_build():
+			print("Ending, arena won" if is_won else "Ending, arena lost")
+		ended.emit(is_won)
 
 
 func get_characters():
