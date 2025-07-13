@@ -117,7 +117,8 @@ func _ended():
 		team_scores[character.team] = team_scores.get(character.team, 0.0) + character.health_points
 		
 	for team in team_scores.keys():
-		print("Team %d has %d points" % [team, team_scores[team]])
+		if OS.is_debug_build():
+			print("Team %d has %d points" % [team, team_scores[team]])
 	
 	var is_won = team_scores[1] > team_scores[2]
 	

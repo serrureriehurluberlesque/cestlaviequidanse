@@ -118,14 +118,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		var v = get_linear_velocity()
 		var stop_factor = v.length_squared() / (max(move_speed, 1.0) if move_speed else 1.0)
-			   #if stop_factor:
-					   #print(stop_factor)
 		apply_central_impulse(-1.0 * mass * v)
 		
 		var rv = get_angular_velocity()
 		var rstop_factor = rv ** 2 / (max(orientation_speed, 1.0) if orientation_speed else 1.0)
-			   #if rstop_factor:
-					   #print(rstop_factor)
 		var self_inertia = 1.0 / PhysicsServer2D.body_get_direct_state(get_rid()).inverse_inertia
 		
 		if self_inertia < INF:

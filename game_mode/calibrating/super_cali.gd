@@ -41,7 +41,6 @@ func test_values(targeting_pos, targeting_rot, custom_move_range, custom_orienta
 
 
 func _on_calibrating_finished(expected_dpos, dpos, expected_drot, drot) -> void:
-	#print(expected_dpos, dpos, expected_drot, drot)
 	await get_tree().create_timer(1.0).timeout
 	test_done.emit(dpos, drot)
 	
