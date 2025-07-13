@@ -20,8 +20,8 @@ func _on_pressed() -> void:
 		text.set_text("")
 
 
-func start(path, init_text := "", skippable := true):
-	if not skippable:
+func start(path, init_text := "", _skippable := true):
+	if not _skippable:
 		skippable = false
 	show()
 	texture_normal = load(path)
