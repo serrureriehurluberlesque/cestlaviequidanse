@@ -23,5 +23,5 @@ texture = ExtResource("2_jr8xk")
 [node name="Sprite" type="Sprite2D" parent="Hitbox/WeaponSprite"]
 
 [node name="AnimationTime" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 0.9
 one_shot = true

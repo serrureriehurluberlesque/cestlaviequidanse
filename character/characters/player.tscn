@@ -6,7 +6,7 @@
 
 [node name="Player" node_paths=PackedStringArray("range_indicator") instance=ExtResource("1_1b0ac")]
 range_indicator = NodePath("Decider/RangeIndicator")
-color_override = Color(0, 1, 0, 1)
+color_override = Color(0.0980392, 0.74902, 0.0980392, 1)
 
 [node name="Decider" parent="." index="2"]
 script = ExtResource("2_kfao2")

@@ -15,8 +15,8 @@ const SPRITE_ROTATION = PI / 2
 @onready var health_points := max_health_points
 
 var team_colors = {
-	1: Color(0, 0, 1),
-	2: Color(1, 0, 0),
+	1: Color(0.1, 0.1, 0.75),
+	2: Color(0.75, 0.1, 0.1),
 }
 
 var ghost: Node2D
@@ -48,6 +48,9 @@ func _ready() -> void:
 	$Body/Sprite2D/Portrait.set_max_value(max_health_points)
 	$Body/Sprite2D/Portrait.set_color(get_color())
 	
+	for action in get_actions().values():
+		action.modulate = get_color()
+	
 	$Control/LifeBar.max_value = max_health_points
 	$Control/LifeBarDamage.max_value = max_health_points
 	update_lifebar()
@@ -59,6 +62,7 @@ func _ready() -> void:
 	ghost.hide()
 	for action in get_actions().values():
 		var ghost_hitbox = action.get_hitbox_ghost()
+		ghost_hitbox.modulate = get_color()
 		if action.has_fast_activation:
 			$Body.add_child(ghost_hitbox)
 		else :
