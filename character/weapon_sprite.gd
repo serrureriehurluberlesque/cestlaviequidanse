@@ -11,7 +11,7 @@ enum WeaponTypes {
 }
 
 var sprite_paths = {
-	WeaponTypes.MOVE: "",
+	WeaponTypes.MOVE: "foot",
 	WeaponTypes.SWORD: "sword",
 	WeaponTypes.SPEAR: "spear",
 	WeaponTypes.DAGGER: "dagger",
@@ -23,5 +23,9 @@ func set_size(_size) -> void:
 
 
 func set_weapon(_weapon_type) -> void:
-	if sprite_paths[_weapon_type]:
-		$Sprite.texture = load("res://character/actions/assets/%s.png" % [sprite_paths[_weapon_type]])
+	if get_sprite_path(_weapon_type):
+		$Sprite.texture = load(get_sprite_path(_weapon_type))
+
+
+func get_sprite_path(_weapon_type):
+	return "res://character/actions/assets/%s.png" % [sprite_paths[_weapon_type]]

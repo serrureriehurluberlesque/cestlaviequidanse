@@ -26,17 +26,17 @@ func _ready() -> void:
 func init_buttons(actions) -> void:
 	var i = 1
 	for action_name in actions:
-		var button = TextureButton.new()
+		var button = actions[action_name].get_icon()
 		button.set_name(action_name)
 		actions_ui.add_child(button)
-		button.toggle_mode = true
-		button.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
-		button.keep_pressed_outside = true
-		for texture in ["normal", "hover", "pressed"]:
-			var path = "res://character/actions/assets/%s_icon_%s.png" % [action_name.to_snake_case(), texture]
-			if not path.is_absolute_path():
-				path = "res://character/actions/assets/%s_icon_%s.png" % ["default", texture]
-			button.call("set_texture_" + texture, load(path))
+		#button.toggle_mode = true
+		#button.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
+		#button.keep_pressed_outside = true
+		#for texture in ["normal", "hover", "pressed"]:
+			#var path = "res://character/actions/assets/%s_icon_%s.png" % [action_name.to_snake_case(), texture]
+			#if not path.is_absolute_path():
+				#path = "res://character/actions/assets/%s_icon_%s.png" % ["default", texture]
+			#button.call("set_texture_" + texture, load(path))
 		button.toggled.connect(button_toggled.bind(actions[action_name]))
 		action_matching[i] = actions[action_name]
 		i += 1

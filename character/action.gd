@@ -34,6 +34,10 @@ func _stop_animation():
 func get_hitbox_ghost():
 	return $Hitbox.duplicate()
 
+func get_icon():
+	var icon = load("res://character/actions/action_button.tscn").instantiate()
+	icon.set_icon_sprite(weapon_sprite.get_sprite_path(weapon_type))
+	return icon
 # ---- Ajouts pour l'IA ----
 
 func expected_position_range() -> float:

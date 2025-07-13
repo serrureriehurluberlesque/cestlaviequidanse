@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bn8ljj8kmeuwd"]
+
+[ext_resource type="Texture2D" uid="uid://nvnrerfmc26b" path="res://character/actions/assets/icon_normal.png" id="1_jabfn"]
+[ext_resource type="Texture2D" uid="uid://cdr65fcaa3tbb" path="res://character/actions/assets/icon_pressed.png" id="2_pvo6v"]
+[ext_resource type="Texture2D" uid="uid://bkg61hsstnvjv" path="res://character/actions/assets/icon_hover.png" id="3_pvo6v"]
+[ext_resource type="Script" uid="uid://b8g6mg5hnlr" path="res://character/actions/action_button.gd" id="4_cpwqc"]
+
+[node name="ActionButton" type="TextureButton"]
+offset_right = 128.0
+offset_bottom = 128.0
+toggle_mode = true
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("1_jabfn")
+texture_pressed = ExtResource("2_pvo6v")
+texture_hover = ExtResource("3_pvo6v")
+script = ExtResource("4_cpwqc")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+mouse_filter = 2

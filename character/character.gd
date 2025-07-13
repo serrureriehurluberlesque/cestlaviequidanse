@@ -65,7 +65,7 @@ func _ready() -> void:
 		ghost_hitbox.modulate = get_color()
 		if action.has_fast_activation:
 			$Body.add_child(ghost_hitbox)
-		else :
+		elif action.has_slow_activation:
 			ghost.add_child(ghost_hitbox)
 
 		ghost_hitbox.hide()
