@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dgrpj6k4h3qob" path="res://character/action.gd" id="1_c7mkc"]
 [ext_resource type="Script" uid="uid://cri47lx6kmmau" path="res://character/weapon_sprite.gd" id="2_edakb"]
-[ext_resource type="Texture2D" uid="uid://dqlfvgl6srysa" path="res://character/actions/assets/area.png" id="2_jr8xk"]
+[ext_resource type="Texture2D" uid="uid://c7spr4cenn3og" path="res://character/actions/assets/area.png" id="2_jr8xk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c7mkc"]
 
