@@ -50,25 +50,31 @@ func _unhandled_input(event):
 	# Mouse in viewport coordinates.
 	if event is InputEventMouseButton:
 		if event.pressed and is_selection_step(SelectionSteps.POSITION):
-			move_target = (get_viewport().get_screen_transform() * get_viewport().get_canvas_transform()).affine_inverse() * event.position
+			move_target = mouse_event_to_game(event.position)
 			set_selection_step(SelectionSteps.ROTATION)
 		elif not event.pressed and is_selection_step(SelectionSteps.ROTATION):
-			var orientation_target = (get_viewport().get_screen_transform() * get_viewport().get_canvas_transform()).affine_inverse() * event.position
+			var orientation_target = mouse_event_to_game(event.position)
 			rotation_target = (orientation_target - move_target).angle()
 			set_selection_step(SelectionSteps.SELECTED)
 	elif event is InputEventMouseMotion:
 		if is_selection_step(SelectionSteps.ACTION):
-			move_target = (get_viewport().get_screen_transform() * get_viewport().get_canvas_transform()).affine_inverse() * event.position
+			move_target = mouse_event_to_game(event.position)
 		elif is_selection_step(SelectionSteps.POSITION):
-			move_target = (get_viewport().get_screen_transform() * get_viewport().get_canvas_transform()).affine_inverse() * event.position
+			move_target = mouse_event_to_game(event.position)
 			update_ghost()
 		elif is_selection_step(SelectionSteps.ROTATION):
-			var orientation_target = (get_viewport().get_screen_transform() * get_viewport().get_canvas_transform()).affine_inverse() * event.position
+			var orientation_target = mouse_event_to_game(event.position)
 			rotation_target = (orientation_target - move_target).angle()
 			update_ghost()
 	for i in range(1,5):
 		if event.is_action_pressed("action%d" % [i]) and i in action_matching:
 			select_action(action_matching[i])
+
+
+func mouse_event_to_game(event_position):
+	var game_position = (get_viewport().get_canvas_transform()).affine_inverse() * event_position  # get_viewport().get_screen_transform() * 
+	return game_position
+
 
 func set_selection_step(step):
 	selection_step = step
