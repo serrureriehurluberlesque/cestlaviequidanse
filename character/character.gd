@@ -10,6 +10,7 @@ const SPRITE_ROTATION = PI / 2
 @export var range_indicator : Node2D
 @export var color_override : Color
 
+
 @onready var actions := $Actions as Node2D
 @onready var decider := $Decider as Decider
 @onready var health_points := max_health_points
@@ -19,6 +20,8 @@ var team_colors = {
 	2: Color(0.75, 0.1, 0.1),
 }
 
+var stats : Stats
+var actual_round_number := 0
 var ghost: Node2D
 var ghost_hitboxes = {}
 var damage_stack: Array[float] = []
@@ -38,6 +41,14 @@ func get_color() -> Color:
 
 
 func _ready() -> void:
+	stats = Stats.new()
+	stats.add_stat("move", {"weight": -1.0}, 1.0)
+	stats.add_stat("orientation", {"focus": -1.0}, 1.0)
+	stats.add_stat("aoe", {"large": 1.0}, 1.0)
+	stats.add_stat("reach", {"large": -1.0}, 1.0)
+	stats.add_stat("damage", {"focus": 1.0}, 1.0)
+	stats.add_stat("armor", {"weight": 1.0}, 1.0)
+	
 	for a in actions.get_children():
 		a.hide()
 	
@@ -128,7 +139,8 @@ func _physics_process(delta: float) -> void:
 			apply_torque_impulse(-1.0 * self_inertia * rv)
 
 
-func start_round():
+func start_round(round_number):
+	stats.start_round(round_number)
 	decider.start_selecting_action(get_actions(), get_position(), (get_rotation() - SPRITE_ROTATION), team)
 
 func end_selection():

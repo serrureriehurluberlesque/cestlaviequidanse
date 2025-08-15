@@ -64,7 +64,7 @@ func _start_round():
 	if OS.is_debug_build():
 		print("Starting round %d" % [actual_round_number])
 	
-	arena_says("start_round")
+	arena_says("start_round", actual_round_number)
 	action_selection_timer.start()
 
 
@@ -137,9 +137,12 @@ func get_characters():
 	return characters.get_children()
 
 
-func arena_says(function):
+func arena_says(function, rond_number=null):
 	for character in get_characters():
-		character.call(function)
+		if rond_number != null:
+			character.call(function, rond_number)
+		else:
+			character.call(function)
 
 
 func _drop_camera(pos):
