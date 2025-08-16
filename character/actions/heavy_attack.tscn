@@ -11,6 +11,8 @@ move_range = 1.5
 orientation_range = 0.4
 damage = 30.0
 has_slow_activation = true
+buff_tag = "focus"
+buff_value = 0.25
 
 [node name="Hitbox" parent="." index="0"]
 position = Vector2(0, -160)

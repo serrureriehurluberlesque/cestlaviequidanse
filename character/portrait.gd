@@ -31,5 +31,6 @@ func set_color(_color) -> void:
 
 
 func clean():
+	set_value(max_value)
 	$BackgroundDead.queue_free()
 	$CharacterDead.queue_free()

@@ -25,7 +25,7 @@ func add_stat(name: String, tags: Dictionary, base_value: float):
 
 
 func get_stat(name: String):
-	return stats[name]["value"]
+	return max(0.01, stats[name]["value"])
 
 
 func _compute_value():

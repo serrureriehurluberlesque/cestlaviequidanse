@@ -66,9 +66,13 @@ func _ready() -> void:
 	$Control/LifeBarDamage.max_value = max_health_points
 	update_lifebar()
 	
+	action = get_actions()["Move"]
+
+func create_ghosts():
 	ghost = $Body/Sprite2D.duplicate()
 	$Body.add_child(ghost)
 	ghost.modulate.a = 0.8
+	ghost.get_node("Portrait").set_max_value(max_health_points)
 	ghost.get_node("Portrait").clean()
 	ghost.hide()
 	for action in get_actions().values():
@@ -81,9 +85,9 @@ func _ready() -> void:
 
 		ghost_hitbox.hide()
 		ghost_hitboxes[action.name] = ghost_hitbox
-	
-	action = get_actions()["Move"]
 
+func remove_ghosts():
+	ghost.free()
 
 func _physics_process(delta: float) -> void:
 	if is_moving:
@@ -141,6 +145,9 @@ func _physics_process(delta: float) -> void:
 
 func start_round(round_number):
 	stats.start_round(round_number)
+	for action in get_actions().values():
+		action.update_aoe(stats.get_stat("aoe"), stats.get_stat("reach"))
+	create_ghosts()
 	decider.start_selecting_action(get_actions(), get_position(), (get_rotation() - SPRITE_ROTATION), team)
 
 func end_selection():
@@ -161,6 +168,7 @@ func start_slow_activations():
 
 func end_round():
 	unstack_damage()
+	remove_ghosts()
 
 func get_actions():
 	var dict_of_actions = {}
@@ -169,15 +177,18 @@ func get_actions():
 	return dict_of_actions
 
 func do_attack_activation():
+	
 	action.start_animation()
 	
 	for target in action.get_hitted_targets():
 		if target != self and "hurt" in target:
-			target.hurt(action.damage)
+			target.hurt(action.damage * stats.get_stat("damage"))
 
 func hurt(damage):
-	damage_stack.append(damage)
-	$Control/LifeBarDamage.set_value($Control/LifeBarDamage.get_value() - damage)
+	var damage_taken = max(0, damage / stats.get_stat("armor"))
+	
+	damage_stack.append(damage_taken)
+	$Control/LifeBarDamage.set_value($Control/LifeBarDamage.get_value() - damage_taken)
 
 func update_lifebar():
 	$Body/Sprite2D/Portrait.set_value(health_points)
@@ -212,8 +223,10 @@ func select_action(selected_action, selected_move_target, selected_rotation_targ
 		rotation_target = selected_rotation_target
 		
 		rotation_target += SPRITE_ROTATION
-		move_speed = action.move_range
-		orientation_speed = action.orientation_range
+		move_speed = action.move_range * stats.get_stat("move")
+		orientation_speed = action.orientation_range * stats.get_stat("orientation")
+		
+		action.buff(stats)
 	else:
 		move_target = get_position()
 		rotation_target = get_rotation()
