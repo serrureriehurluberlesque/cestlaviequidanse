@@ -4,6 +4,7 @@ extends RigidBody2D
 const SPEED = 72.0
 const RSPEED = 0.75
 const SPRITE_ROTATION = PI / 2
+const MOVE_TOTAL_TIME = 2.0  # todo faut le faire en variable globale pour que ça soit sync avec le timer d'arena
 
 @export var max_health_points:= 100.0
 @export var team:= 1
@@ -30,6 +31,7 @@ var move_target: Vector2
 var rotation_target: float
 var rotation_intensity: float
 var is_moving: bool
+var move_timer: float
 
 var move_speed: float
 var orientation_speed: float
@@ -94,7 +96,10 @@ func remove_ghosts():
 
 func _physics_process(delta: float) -> void:
 	if is_moving:
+		move_timer += delta
+		var time_ratio = max(0.0, (1 - 1.25 * move_timer / MOVE_TOTAL_TIME))
 		if move_speed > 0.0:
+			var move_target_updated = move_target + time_ratio * Vector2(rotation_intensity, 0).rotated(rotation_target + PI / 2)
 			# Linear
 			var max_speed = SPEED * move_speed
 			var acceleration =  max_speed
@@ -102,7 +107,7 @@ func _physics_process(delta: float) -> void:
 			
 			var speed = get_linear_velocity()
 			
-			var dx = move_target - get_position()
+			var dx = move_target_updated - get_position()
 			
 			var speed_target_squared = 2 * acceleration * dx
 			if speed_target_squared.length_squared() > 0.0:
@@ -144,6 +149,8 @@ func _physics_process(delta: float) -> void:
 		
 		if self_inertia < INF:
 			apply_torque_impulse(-1.0 * self_inertia * rv)
+		
+		move_timer = 0.0
 
 
 func start_round(round_number):

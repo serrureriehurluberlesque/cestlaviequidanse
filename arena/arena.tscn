@@ -34,6 +34,8 @@ tile_set = SubResource("TileSet_u13ga")
 [node name="Characters" type="Node2D" parent="."]
 
 [node name="Player" parent="Characters" instance=ExtResource("3_dotur")]
+max_health_points = 100.0
+team = 1
 
 [node name="ActionSelectionTimer" type="Timer" parent="."]
 wait_time = 3.0
