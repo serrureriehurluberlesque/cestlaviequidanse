@@ -48,6 +48,7 @@ func _unhandled_input(event):
 			var orientation_target = mouse_event_to_game(event.position)
 			if (orientation_target - move_target).length() > 0.0001:
 				rotation_target = (orientation_target - move_target).angle()
+				rotation_intensity = max(0.0, (orientation_target - move_target).length() - 64.0)
 			set_selection_step(SelectionSteps.SELECTED)
 	elif event is InputEventMouseMotion:
 		if is_selection_step(SelectionSteps.ACTION):
@@ -59,6 +60,7 @@ func _unhandled_input(event):
 			var orientation_target = mouse_event_to_game(event.position)
 			if (orientation_target - move_target).length() > 0.0001:
 				rotation_target = (orientation_target - move_target).angle()
+				rotation_intensity = max(0.0, (orientation_target - move_target).length() - 64.0)
 			update_ghost()
 	for i in range(1,len(action_matching) + 1):
 		if event.is_action_pressed("action%d" % [i]) and i in action_matching:
@@ -94,17 +96,18 @@ func unselect_action(action, hard=true):
 	if hard:
 		selected_action = null
 
-func _start_selecting_action(actions, position, angle, team):
+func _start_selecting_action(actions, position, angle, intensity, team):
 	init_buttons(actions)
 	selection_ui.show()
 	set_selection_step(SelectionSteps.ACTION)
 	
 	actual_position = position
 	actual_rotation = angle
+	rotation_intensity = intensity
 	move_target = position
 	rotation_target = angle
 
-func _end_selecting_action(actions, position, angle, team):
+func _end_selecting_action(actions, position, angle, intensity, team):
 	if selected_action:
 		unselect_action(selected_action, false)
 	set_selection_step(SelectionSteps.NONE)

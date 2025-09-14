@@ -28,6 +28,7 @@ var damage_stack: Array[float] = []
 var action: Action
 var move_target: Vector2
 var rotation_target: float
+var rotation_intensity: float
 var is_moving: bool
 
 var move_speed: float
@@ -150,10 +151,10 @@ func start_round(round_number):
 	for action in get_actions().values():
 		action.update_with_stats(stats)
 	create_ghosts()
-	decider.start_selecting_action(get_actions(), get_position(), (get_rotation() - SPRITE_ROTATION), team)
+	decider.start_selecting_action(get_actions(), get_position(), (get_rotation() - SPRITE_ROTATION), 0.0, team)
 
 func end_selection():
-	decider.end_selecting_action(get_actions(), get_position(), (get_rotation() - SPRITE_ROTATION), team)
+	decider.end_selecting_action(get_actions(), get_position(), (get_rotation() - SPRITE_ROTATION), 0.0, team)
 
 func start_fast_activations():
 	if action and action.has_fast_activation:
@@ -216,13 +217,15 @@ func unstack_damage():
 	else:
 		action = null
 		move_target = Vector2.ZERO
-		rotation_target = 0
+		rotation_target = 0.0
+		rotation_intensity = 0.0
 
-func select_action(selected_action, selected_move_target, selected_rotation_target):
+func select_action(selected_action, selected_move_target, selected_rotation_target, selected_rotation_intensity):
 	if selected_action:
 		action = selected_action
 		move_target = selected_move_target
 		rotation_target = selected_rotation_target
+		rotation_intensity = selected_rotation_intensity
 		
 		rotation_target += SPRITE_ROTATION
 		
@@ -237,6 +240,7 @@ func select_action(selected_action, selected_move_target, selected_rotation_targ
 	else:  # on veut plutôt toujours attribuer une action?
 		move_target = get_position()
 		rotation_target = get_rotation()
+		rotation_intensity = 0.0
 		
 		move_speed = 0.0
 		orientation_speed = 0.0
@@ -244,7 +248,7 @@ func select_action(selected_action, selected_move_target, selected_rotation_targ
 		defense = 0.0
 		
 
-func update_ghost(selected_action_name, move_target, rotation_target):
+func update_ghost(selected_action_name, move_target, rotation_target, rotation_intensity = 128.0):
 	if selected_action_name:
 		var ghost_pos = (move_target - get_position()).rotated(-(get_rotation() - SPRITE_ROTATION) - PI/2)
 		ghost.set_position((move_target - get_position()).rotated(-(get_rotation() - SPRITE_ROTATION) - PI/2))
@@ -259,7 +263,7 @@ func update_ghost(selected_action_name, move_target, rotation_target):
 				ghost_pos,
 				- SPRITE_ROTATION,
 				128.0,
-				100.0,
+				rotation_intensity,
 				rotation_target - (get_rotation() - SPRITE_ROTATION) - PI/2,
 			)
 			range_indicator.show()

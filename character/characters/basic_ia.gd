@@ -3,7 +3,7 @@ extends Decider
 
 @onready var detection := $Detection as Area2D
 
-func _start_selecting_action(actions, position, angle, team):
+func _start_selecting_action(actions, position, angle, intensity, team):
 	await get_tree().create_timer(0.5 + randf()).timeout
 
 	# 1. Recherche de la cible la plus proche
@@ -42,9 +42,11 @@ func _start_selecting_action(actions, position, angle, team):
 			var optimal_distance = best_action.optimal_distance()
 			move_target = target_position - direction * optimal_distance
 			rotation_target = rotation_to_target
+			rotation_intensity = 128.0
 			selected_action = best_action
 		else:
 			# Si aucune action valable, comportement fallback
 			move_target = target_position - direction * 300.0
 			rotation_target = rotation_to_target
+			rotation_intensity = 128.0
 			selected_action = actions["Move"]
