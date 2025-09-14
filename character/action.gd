@@ -4,17 +4,23 @@ extends Node2D
 const MOVE_RANGE_MULTIPLIER = 128.0
 const ORIENTATION_RANGE_MULTIPLIER = PI/2.0
 
-@export var weapon_type := WeaponSprite.WeaponTypes.MOVE
 @export var move_range:= 1.0
 @export var orientation_range:= 1.0
 @export var damage:= 10.0
+@export var defense:= 10.0
+
+@export var weapon_type := WeaponSprite.WeaponTypes.MOVE
 @export var has_slow_activation:= false
 @export var has_fast_activation:= false
 @export var buff_tag:= ""
 @export var buff_value:= 0.0
-@export var action_is_buff:= false
 
 var base_size
+var base_move_range
+var base_orientation_range
+var base_damage
+var base_defense
+
 @onready var hitbox := $Hitbox as Area2D
 @onready var animation_time := $AnimationTime as Timer
 @onready var weapon_sprite := $Hitbox/WeaponSprite as WeaponSprite
@@ -23,15 +29,26 @@ func _ready() -> void:
 	animation_time.connect("timeout", _stop_animation)
 	
 	base_size = $Hitbox/Shape.shape.size
-	update_aoe(1.0, 1.0)
+	base_move_range = move_range
+	base_orientation_range = orientation_range
+	base_damage = damage
+	base_defense = defense
+	update_with_stats()
 	
 	weapon_sprite.set_weapon(weapon_type)
 
 
-func update_aoe(x, y):
-	var s = Vector2(base_size.x * x, base_size.y * y)
+func update_with_stats(stats=null):
+	var x = stats.get_stat("area") if stats else 0.0
+	var y = stats.get_stat("area") if stats else 0.0
+	var s = Vector2(base_size.x + x, base_size.y + y)
 	$Hitbox/Shape.shape.size = s
 	weapon_sprite.set_size(s)
+	
+	move_range = base_move_range + stats.get_stat("move") if stats else 0.0
+	orientation_range = base_orientation_range + stats.get_stat("orientation") if stats else 0.0
+	damage = base_damage + stats.get_stat("damage") if stats else 0.0
+	defense = base_defense + stats.get_stat("defense") if stats else 0.0
 
 
 func get_hitted_targets():
@@ -58,8 +75,6 @@ func get_icon():
 
 
 func buff(stats: Stats):
-	if action_is_buff:
-		stats.add_buff(buff_tag, buff_value * 4.0, 0)
 	stats.add_buff(buff_tag, buff_value * 2.0, 1)
 	stats.add_buff(buff_tag, buff_value, 2)
 

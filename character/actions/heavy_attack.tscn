@@ -6,10 +6,11 @@
 size = Vector2(80, 190)
 
 [node name="HeavyAttack" instance=ExtResource("1_ujs17")]
-weapon_type = 2
 move_range = 1.5
 orientation_range = 0.4
 damage = 30.0
+defense = 0.0
+weapon_type = 2
 has_slow_activation = true
 buff_tag = "damage"
 

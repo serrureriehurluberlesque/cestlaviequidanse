@@ -28,9 +28,12 @@ var damage_stack: Array[float] = []
 var action: Action
 var move_target: Vector2
 var rotation_target: float
+var is_moving: bool
+
 var move_speed: float
 var orientation_speed: float
-var is_moving: bool
+var damage: float
+var defense: float
 
 
 func get_color() -> Color:
@@ -42,11 +45,11 @@ func get_color() -> Color:
 
 func _ready() -> void:
 	stats = Stats.new()
-	stats.add_stat("move", {"move": 1.0}, 1.0)
-	stats.add_stat("orientation", {"orientation": 1.0}, 1.0)
-	stats.add_stat("area", {"area": 1.0}, 1.0)
-	stats.add_stat("damage", {"damage": 1.0}, 1.0)
-	stats.add_stat("armor", {"armor": 1.0}, 1.0)
+	stats.add_stat("move", {"move": 1.0}, 2.0)
+	stats.add_stat("orientation", {"orientation": 1.0}, 2.0)
+	stats.add_stat("area", {"area": 1.0}, 100.0)
+	stats.add_stat("damage", {"damage": 1.0}, 20.0)
+	stats.add_stat("defense", {"defense": 1.0}, 20.0)
 	
 	for a in actions.get_children():
 		a.hide()
@@ -145,7 +148,7 @@ func _physics_process(delta: float) -> void:
 func start_round(round_number):
 	stats.start_round(round_number)
 	for action in get_actions().values():
-		action.update_aoe(stats.get_stat("area"), stats.get_stat("area"))
+		action.update_with_stats(stats)
 	create_ghosts()
 	decider.start_selecting_action(get_actions(), get_position(), (get_rotation() - SPRITE_ROTATION), team)
 
@@ -181,12 +184,13 @@ func do_attack_activation():
 	
 	for target in action.get_hitted_targets():
 		if target != self and "hurt" in target:
-			target.hurt(action.damage * stats.get_stat("damage"))
+			target.hurt(damage)
 
-func hurt(damage):
-	var damage_taken = max(0, damage / stats.get_stat("armor"))
-	damage_stack.append(damage_taken)
-	$Control/LifeBarDamage.set_value($Control/LifeBarDamage.get_value() - damage_taken)
+func hurt(damage_received):
+	if damage_received > 0:
+		var damage_taken = damage_received ** 2 / (damage_received + defense)
+		damage_stack.append(damage_taken)
+		$Control/LifeBarDamage.set_value($Control/LifeBarDamage.get_value() - damage_taken)
 
 func update_lifebar():
 	$Body/Sprite2D/Portrait.set_value(health_points)
@@ -225,15 +229,19 @@ func select_action(selected_action, selected_move_target, selected_rotation_targ
 		action.buff(stats)
 		stats.update_round()
 		
-		move_speed = action.move_range * stats.get_stat("move")
-		orientation_speed = action.orientation_range * stats.get_stat("orientation")
+		move_speed = action.move_range
+		orientation_speed = action.orientation_range
+		damage = action.damage
+		defense = action.defense
 		
-	else:
+	else:  # on veut plutôt toujours attribuer une action?
 		move_target = get_position()
 		rotation_target = get_rotation()
 		
 		move_speed = 0.0
 		orientation_speed = 0.0
+		damage = 0.0
+		defense = 0.0
 		
 
 func update_ghost(selected_action_name, move_target, rotation_target):

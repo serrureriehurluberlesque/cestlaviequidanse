@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://brrts4nchl7ga" path="res://character/action.tscn" id="1_k2yat"]
 
 [node name="Defend" instance=ExtResource("1_k2yat")]
-weapon_type = 4
 move_range = 0.25
 orientation_range = 0.5
 damage = 0.0
-buff_tag = "armor"
+defense = 20.0
+weapon_type = 4
+buff_tag = "defense"
 buff_value = 0.25
-action_is_buff = true

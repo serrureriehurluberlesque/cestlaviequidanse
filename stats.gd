@@ -38,7 +38,7 @@ func _compute_value():
 		#print(stats)
 		#print(buffs)
 	for s in stats:
-		var v = 1.0
+		var v = 0.0
 		if buffs.has(actual_round_number):
 			for buff in buffs[actual_round_number]:
 				if buff in stats[s]["tags"]:
