@@ -8,6 +8,7 @@ enum WeaponTypes {
 	SWORD,
 	SPEAR,
 	DAGGER,
+	SHIELD,
 }
 
 var sprite_paths = {
@@ -15,6 +16,7 @@ var sprite_paths = {
 	WeaponTypes.SWORD: "sword",
 	WeaponTypes.SPEAR: "spear",
 	WeaponTypes.DAGGER: "dagger",
+	WeaponTypes.SHIELD: "shield",
 }
 
 

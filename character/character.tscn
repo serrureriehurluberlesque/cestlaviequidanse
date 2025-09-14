@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cg7lm7bqobbcv"]
+[gd_scene load_steps=20 format=3 uid="uid://cg7lm7bqobbcv"]
 
 [ext_resource type="Script" uid="uid://bpaf87rq76s1h" path="res://character/character.gd" id="1_yf0e5"]
 [ext_resource type="Script" uid="uid://46fw2h0ggmkt" path="res://character/portrait.gd" id="2_gx66j"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://gn10klvgm7qn" path="res://character/actions/medium_attack.tscn" id="5_0rvpn"]
 [ext_resource type="Script" uid="uid://o33r22yt5ntx" path="res://character/decider.gd" id="6_o6jyn"]
 [ext_resource type="Texture2D" uid="uid://bu5ryjv30y7nv" path="res://character/assets/blood.png" id="8_wy5t8"]
+[ext_resource type="PackedScene" uid="uid://bw0acl7ek485c" path="res://character/actions/defend.tscn" id="10_8brn5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o6jyn"]
 friction = 0.1
@@ -89,6 +90,8 @@ region_rect = Rect2(0, 0, 128, 128)
 [node name="MediumAttack" parent="Actions" instance=ExtResource("5_0rvpn")]
 
 [node name="HeavyAttack" parent="Actions" instance=ExtResource("4_0rvpn")]
+
+[node name="Defend" parent="Actions" instance=ExtResource("10_8brn5")]
 
 [node name="Decider" type="Node2D" parent="."]
 script = ExtResource("6_o6jyn")

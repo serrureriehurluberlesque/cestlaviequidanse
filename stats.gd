@@ -10,14 +10,16 @@ func start_round(round_number: int):
 	_compute_value()
 
 
-func add_buff(tag: String, increase: float, duration: int):
-	for t in duration:
-		var key = actual_round_number + t + 1
-		if not buffs.has(key):
-			buffs[key] = {}
-		if not buffs[key].has(tag):
-			buffs[key][tag] = []
-		buffs[key][tag].append(increase)
+func update_round():
+	_compute_value()
+
+func add_buff(tag: String, increase: float, round: int):
+	var key = actual_round_number + round
+	if not buffs.has(key):
+		buffs[key] = {}
+	if not buffs[key].has(tag):
+		buffs[key][tag] = []
+	buffs[key][tag].append(increase)
 
 
 func add_stat(name: String, tags: Dictionary, base_value: float):

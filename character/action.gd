@@ -12,6 +12,7 @@ const ORIENTATION_RANGE_MULTIPLIER = PI/2.0
 @export var has_fast_activation:= false
 @export var buff_tag:= ""
 @export var buff_value:= 0.0
+@export var action_is_buff:= false
 
 var base_size
 @onready var hitbox := $Hitbox as Area2D
@@ -57,8 +58,10 @@ func get_icon():
 
 
 func buff(stats: Stats):
+	if action_is_buff:
+		stats.add_buff(buff_tag, buff_value * 4, 0)
+	stats.add_buff(buff_tag, buff_value * 2, 1)
 	stats.add_buff(buff_tag, buff_value, 2)
-	stats.add_buff(buff_tag, buff_value, 1)
 
 # ---- Ajouts pour l'IA ----
 

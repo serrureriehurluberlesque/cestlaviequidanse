@@ -60,7 +60,7 @@ func _unhandled_input(event):
 			if (orientation_target - move_target).length() > 0.0001:
 				rotation_target = (orientation_target - move_target).angle()
 			update_ghost()
-	for i in range(1,5):
+	for i in range(1,len(action_matching) + 1):
 		if event.is_action_pressed("action%d" % [i]) and i in action_matching:
 			select_action(action_matching[i])
 

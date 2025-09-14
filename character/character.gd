@@ -226,6 +226,7 @@ func select_action(selected_action, selected_move_target, selected_rotation_targ
 		orientation_speed = action.orientation_range * stats.get_stat("orientation")
 		
 		action.buff(stats)
+		stats.update_round()
 	else:
 		move_target = get_position()
 		rotation_target = get_rotation()
