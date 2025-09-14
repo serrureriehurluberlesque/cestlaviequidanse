@@ -59,8 +59,8 @@ func get_icon():
 
 func buff(stats: Stats):
 	if action_is_buff:
-		stats.add_buff(buff_tag, buff_value * 4, 0)
-	stats.add_buff(buff_tag, buff_value * 2, 1)
+		stats.add_buff(buff_tag, buff_value * 4.0, 0)
+	stats.add_buff(buff_tag, buff_value * 2.0, 1)
 	stats.add_buff(buff_tag, buff_value, 2)
 
 # ---- Ajouts pour l'IA ----

@@ -185,7 +185,6 @@ func do_attack_activation():
 
 func hurt(damage):
 	var damage_taken = max(0, damage / stats.get_stat("armor"))
-	
 	damage_stack.append(damage_taken)
 	$Control/LifeBarDamage.set_value($Control/LifeBarDamage.get_value() - damage_taken)
 
@@ -222,11 +221,13 @@ func select_action(selected_action, selected_move_target, selected_rotation_targ
 		rotation_target = selected_rotation_target
 		
 		rotation_target += SPRITE_ROTATION
-		move_speed = action.move_range * stats.get_stat("move")
-		orientation_speed = action.orientation_range * stats.get_stat("orientation")
 		
 		action.buff(stats)
 		stats.update_round()
+		
+		move_speed = action.move_range * stats.get_stat("move")
+		orientation_speed = action.orientation_range * stats.get_stat("orientation")
+		
 	else:
 		move_target = get_position()
 		rotation_target = get_rotation()

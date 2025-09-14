@@ -27,10 +27,16 @@ func add_stat(name: String, tags: Dictionary, base_value: float):
 
 
 func get_stat(name: String):
-	return max(0.01, stats[name]["value"])
+	var value = max(0.01, stats[name]["value"])
+	#if OS.is_debug_build():
+		#print("Getting stat %s with value %d" % [name, value])
+	return value
 
 
 func _compute_value():
+	#if OS.is_debug_build():
+		#print(stats)
+		#print(buffs)
 	for s in stats:
 		var v = 1.0
 		if buffs.has(actual_round_number):
