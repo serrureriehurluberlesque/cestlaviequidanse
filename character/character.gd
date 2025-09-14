@@ -259,6 +259,8 @@ func update_ghost(selected_action_name, move_target, rotation_target):
 				ghost_pos,
 				- SPRITE_ROTATION,
 				128.0,
+				100.0,
+				rotation_target - (get_rotation() - SPRITE_ROTATION) - PI/2,
 			)
 			range_indicator.show()
 	else:
