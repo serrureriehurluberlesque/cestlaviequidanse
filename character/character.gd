@@ -97,7 +97,7 @@ func remove_ghosts():
 func _physics_process(delta: float) -> void:
 	if is_moving:
 		move_timer += delta
-		var time_ratio = max(0.0, (1 - 1.25 * move_timer / MOVE_TOTAL_TIME))
+		var time_ratio = max(0.0, (1 - 1.35 * move_timer / MOVE_TOTAL_TIME))
 		if move_speed > 0.0:
 			var move_target_updated = move_target + time_ratio * Vector2(rotation_intensity, 0).rotated(rotation_target + PI / 2)
 			# Linear
