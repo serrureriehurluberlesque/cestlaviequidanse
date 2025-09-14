@@ -10,8 +10,8 @@ weapon_type = 3
 move_range = 1.5
 orientation_range = 1.9
 has_slow_activation = true
-buff_tag = "focus"
-buff_value = -0.25
+buff_tag = "orientation"
+buff_value = 0.25
 
 [node name="Hitbox" parent="." index="0"]
 position = Vector2(0, -114)

@@ -11,7 +11,7 @@ move_range = 0.5
 orientation_range = 1.9
 damage = 15.0
 has_slow_activation = true
-buff_tag = "large"
+buff_tag = "area"
 buff_value = 0.25
 
 [node name="Hitbox" parent="." index="0"]

@@ -42,12 +42,11 @@ func get_color() -> Color:
 
 func _ready() -> void:
 	stats = Stats.new()
-	stats.add_stat("move", {"weight": -1.0}, 1.0)
-	stats.add_stat("orientation", {"focus": -1.0}, 1.0)
-	stats.add_stat("aoe", {"large": 1.0}, 1.0)
-	stats.add_stat("reach", {"large": -1.0}, 1.0)
-	stats.add_stat("damage", {"focus": 1.0}, 1.0)
-	stats.add_stat("armor", {"weight": 1.0}, 1.0)
+	stats.add_stat("move", {"move": 1.0}, 1.0)
+	stats.add_stat("orientation", {"orientation": 1.0}, 1.0)
+	stats.add_stat("area", {"area": 1.0}, 1.0)
+	stats.add_stat("damage", {"damage": 1.0}, 1.0)
+	stats.add_stat("armor", {"armor": 1.0}, 1.0)
 	
 	for a in actions.get_children():
 		a.hide()
@@ -146,7 +145,7 @@ func _physics_process(delta: float) -> void:
 func start_round(round_number):
 	stats.start_round(round_number)
 	for action in get_actions().values():
-		action.update_aoe(stats.get_stat("aoe"), stats.get_stat("reach"))
+		action.update_aoe(stats.get_stat("area"), stats.get_stat("area"))
 	create_ghosts()
 	decider.start_selecting_action(get_actions(), get_position(), (get_rotation() - SPRITE_ROTATION), team)
 
