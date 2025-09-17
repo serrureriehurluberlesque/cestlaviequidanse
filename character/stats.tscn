@@ -26,4 +26,5 @@ amount = 10
 amount_ratio = 0.0
 texture = ExtResource("2_15v2m")
 lifetime = 3.0
+explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_15v2m")
