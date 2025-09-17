@@ -50,11 +50,12 @@ func _ready() -> void:
 	stats = load("res://character/stats.tscn").instantiate()
 	add_child(stats)
 	
-	stats.add_stat("move", {"move": 1.0}, 2.0)
-	stats.add_stat("orientation", {"orientation": 1.0}, 2.0)
-	stats.add_stat("area", {"area": 1.0}, 100.0)
-	stats.add_stat("damage", {"damage": 1.0}, 20.0)
-	stats.add_stat("defense", {"defense": 1.0}, 20.0)
+	var texture = load("res://character/assets/default.png")
+	stats.add_stat("move", {"move": 1.0}, 2.0, texture, Color(1, 1, 1))
+	stats.add_stat("orientation", {"orientation": 1.0}, 2.0, texture, Color(1, 1, 1))
+	stats.add_stat("area", {"area": 1.0}, 100.0, texture, Color(1, 1, 1))
+	stats.add_stat("damage", {"damage": 1.0}, 20.0, texture, Color(1, 1, 1))
+	stats.add_stat("defense", {"defense": 1.0}, 20.0, texture, Color(1, 1, 1))
 	
 	for a in actions.get_children():
 		a.hide()

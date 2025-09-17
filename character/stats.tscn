@@ -1,6 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://cooo7sjsewedl"]
+[gd_scene load_steps=4 format=3 uid="uid://cooo7sjsewedl"]
 
 [ext_resource type="Script" uid="uid://gk0xeqsumj4u" path="res://character/stats.gd" id="1_81whs"]
+[ext_resource type="Texture2D" uid="uid://djb0dthv153rr" path="res://character/assets/default.png" id="2_15v2m"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_15v2m"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 10.0
+emission_ring_radius = 64.0
+emission_ring_inner_radius = 48.0
+emission_ring_cone_angle = 90.0
+orbit_velocity_min = -0.29999992
+orbit_velocity_max = 0.3000001
+gravity = Vector3(0, 0, 0)
+scale_min = 0.25
+scale_max = 0.25
 
 [node name="Stats" type="Node2D"]
 script = ExtResource("1_81whs")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 10
+amount_ratio = 0.0
+texture = ExtResource("2_15v2m")
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_15v2m")
