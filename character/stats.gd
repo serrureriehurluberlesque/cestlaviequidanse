@@ -32,7 +32,7 @@ func add_stat(
 	# Duplique le template
 	var particles = particles_template.duplicate()
 	particles.name = "Particles_" + name
-	# particles.process_material = particles_template.process_material.duplicate()  # pour l'instant c'est tous les même
+	particles.process_material = particles_template.process_material.duplicate()  # pour l'instant c'est tous les même
 	particles.lifetime = particles_template.lifetime
 	particles.amount_ratio = 0.0
 	particles.emitting = true
@@ -74,3 +74,4 @@ func _compute_value():
 		var amount_ratio = diff / stats[s]["base_value"]
 		if stat.has("particles") and stat["particles"]:
 			stat["particles"].amount_ratio = amount_ratio
+			stat["particles"].restart()
