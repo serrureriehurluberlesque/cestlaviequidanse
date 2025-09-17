@@ -55,6 +55,9 @@ physics_material_override = SubResource("PhysicsMaterial_o6jyn")
 continuous_cd = 2
 linear_damp_mode = 1
 script = ExtResource("1_yf0e5")
+max_health_points = null
+team = null
+color_override = null
 
 [node name="Body" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gx66j")

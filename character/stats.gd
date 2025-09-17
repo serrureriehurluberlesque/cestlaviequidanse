@@ -1,4 +1,5 @@
 class_name Stats
+extends Node2D
 
 var stats := {}
 var buffs := {}

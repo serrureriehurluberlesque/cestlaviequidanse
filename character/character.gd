@@ -47,7 +47,9 @@ func get_color() -> Color:
 
 
 func _ready() -> void:
-	stats = Stats.new()
+	stats = load("res://character/stats.tscn").instantiate()
+	add_child(stats)
+	
 	stats.add_stat("move", {"move": 1.0}, 2.0)
 	stats.add_stat("orientation", {"orientation": 1.0}, 2.0)
 	stats.add_stat("area", {"area": 1.0}, 100.0)
