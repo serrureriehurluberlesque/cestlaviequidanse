@@ -7,13 +7,16 @@ var actual_round_number := 0
 
 @onready var particles_template := $GPUParticles2D
 
+func _ready() -> void:
+	particles_template.emitting = false
+
 func start_round(round_number: int):
 	actual_round_number = round_number
 	_compute_value()
 
 func update_round():
 	_compute_value()
-
+	
 func add_buff(tag: String, increase: float, round: int):
 	var key = actual_round_number + round
 	if not buffs.has(key):
@@ -32,8 +35,8 @@ func add_stat(
 	# Duplique le template
 	var particles = particles_template.duplicate()
 	particles.name = "Particles_" + name
-	particles.process_material = particles_template.process_material.duplicate()  # pour l'instant c'est tous les même
-	particles.lifetime = particles_template.lifetime
+	# particles.process_material = particles_template.process_material.duplicate()  # pour l'instant c'est tous les même
+	# particles.lifetime = particles_template.lifetime
 	particles.amount_ratio = 0.0
 	particles.emitting = true
 
@@ -70,8 +73,8 @@ func _compute_value():
 
 		# --- Update des particules ---
 		var stat = stats[s]
-		var diff = abs(stat["value"])
-		var amount_ratio = diff / stats[s]["base_value"]
+		var value = abs(stat["value"])
+		var amount_ratio = value / stat["base_value"]
 		if stat.has("particles") and stat["particles"]:
 			stat["particles"].amount_ratio = amount_ratio
-			stat["particles"].restart()
+			print(stat)

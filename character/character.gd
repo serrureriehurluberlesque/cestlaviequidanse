@@ -49,13 +49,14 @@ func get_color() -> Color:
 func _ready() -> void:
 	stats = load("res://character/stats.tscn").instantiate()
 	add_child(stats)
+	stats.set_position(Vector2())
 	
 	var texture = load("res://character/assets/character_background.png")
-	stats.add_stat("move", {"move": 1.0}, 2.0, texture, Color(0.914, 0.125, 0.0, 0.251))
-	stats.add_stat("orientation", {"orientation": 1.0}, 2.0, texture, Color(0.404, 0.733, 0.0, 0.251))
-	stats.add_stat("area", {"area": 1.0}, 100.0, texture, Color(0.0, 0.615, 0.616, 0.251))
-	stats.add_stat("damage", {"damage": 1.0}, 20.0, texture, Color(0.554, 0.001, 0.671, 0.251))
-	stats.add_stat("defense", {"defense": 1.0}, 20.0, texture, Color(0.502, 0.502, 0.502, 0.251))
+	stats.add_stat("move", {"move": 1.0}, 2.0, texture, Color(0.914, 0.125, 0.0))
+	stats.add_stat("orientation", {"orientation": 1.0}, 2.0, texture, Color(0.304, 0.833, 0.0))
+	stats.add_stat("area", {"area": 1.0}, 100.0, texture, Color(0.0, 0.615, 0.616))
+	stats.add_stat("damage", {"damage": 1.0}, 20.0, texture, Color(0.554, 0.001, 0.671))
+	stats.add_stat("defense", {"defense": 1.0}, 20.0, texture, Color(0.502, 0.502, 0.502))
 	
 	for a in actions.get_children():
 		a.hide()
