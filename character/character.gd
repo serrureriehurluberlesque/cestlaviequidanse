@@ -112,8 +112,12 @@ func _physics_process(delta: float) -> void:
 			var speed_target_squared = 2 * acceleration * dx
 			if speed_target_squared.length_squared() > 0.0:
 				var speed_target = (speed_target_squared.length() ** 0.5) * speed_target_squared.normalized()
-				var dv = speed_target.limit_length(max_speed) - speed
-				3
+				
+				var backward_penalty = 0.15 # a number from 0.0 (no penalty) to 0.5 (no backward movement)
+				var orientation_dephasage = backward_penalty * max_speed * Vector2(1, 0).rotated(get_rotation() + PI / 2)
+				speed_target = (speed_target + orientation_dephasage).limit_length((1 - backward_penalty) * max_speed) - orientation_dephasage
+				
+				var dv = speed_target - speed
 				var a = (dv / delta).limit_length(1 * max_acceleration)
 				apply_central_force(mass * a)
 				
