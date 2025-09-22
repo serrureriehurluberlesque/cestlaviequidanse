@@ -8,12 +8,12 @@ size = Vector2(80, 190)
 [node name="HeavyAttack" instance=ExtResource("1_ujs17")]
 move_range = 1.5
 orientation_range = 0.4
-damage = 30.0
+damage = 25.0
 defense = 0.0
 weapon_type = 2
 has_slow_activation = true
 buff_tag = "damage"
-buff_value = 0.25
+buff_value = 0.2
 
 [node name="Hitbox" parent="." index="0"]
 position = Vector2(0, -160)
