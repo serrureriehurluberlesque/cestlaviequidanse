@@ -90,7 +90,19 @@ func expected_position_range() -> float:
 
 
 func expected_rotation_range() -> float:
-	return orientation_range * ORIENTATION_RANGE_MULTIPLIER
+	var base = orientation_range * ORIENTATION_RANGE_MULTIPLIER
+	var hitbox_width = 0.0
+	var hitbox_length = 0.0
+	if hitbox and hitbox.has_node("Shape"):
+		var shape = hitbox.get_node("Shape").shape
+		if shape and shape.has_method("get_rect"):
+			hitbox_width = shape.get_rect().size.x / 2.0
+			hitbox_length = max(1, abs(abs(hitbox.position.y) - (shape.get_rect().size.y / 2.0)))
+	# Utilise la distance d’attaque comme distance de référence pour calculer l’angle supplémentaire
+	var extra_angle = 0.0
+	if hitbox_width > 0 and hitbox_length > 0:
+		extra_angle = atan(hitbox_width / hitbox_length)
+	return base + extra_angle
 
 
 func optimal_distance() -> float:

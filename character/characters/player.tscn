@@ -5,10 +5,12 @@
 [ext_resource type="Script" uid="uid://dkkltsxj0el6q" path="res://character/characters/range_indicator.gd" id="3_8fbdo"]
 
 [node name="Player" node_paths=PackedStringArray("range_indicator") instance=ExtResource("1_1b0ac")]
-max_health_points = 100.0
-team = 1
 range_indicator = NodePath("Decider/RangeIndicator")
 color_override = Color(0.0980392, 0.74902, 0.0980392, 1)
+
+[node name="LightAttack" parent="Actions" index="1"]
+damage = 10.0
+has_fast_activation = false
 
 [node name="Decider" parent="." index="2"]
 script = ExtResource("2_kfao2")

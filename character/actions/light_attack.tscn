@@ -7,10 +7,12 @@ size = Vector2(120, 80)
 
 [node name="LightAttack" instance=ExtResource("1_vsksi")]
 move_range = 1.5
-orientation_range = 1.9
-defense = 5.0
+orientation_range = 1.5
+damage = null
+defense = 0.0
 weapon_type = 3
 has_slow_activation = true
+has_fast_activation = null
 buff_tag = "orientation"
 buff_value = 0.25
 

@@ -7,7 +7,7 @@ size = Vector2(160, 160)
 
 [node name="MediumAttack" instance=ExtResource("1_8v46k")]
 move_range = 0.5
-orientation_range = 1.9
+orientation_range = 0.5
 damage = 15.0
 weapon_type = 1
 has_slow_activation = true
@@ -15,7 +15,7 @@ buff_tag = "area"
 buff_value = 0.25
 
 [node name="Hitbox" parent="." index="0"]
-position = Vector2(0, -140)
+position = Vector2(0, -100)
 
 [node name="Shape" parent="Hitbox" index="0"]
 shape = SubResource("RectangleShape2D_xgtyb")
