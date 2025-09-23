@@ -12,8 +12,11 @@ func _draw():
 	# Cercle de déplacement
 	if move_range > 0:
 		# todo should be linked to the backward_penalty of the character
-		var backward_penalty = 0.15
-		draw_circle(Vector2(backward_penalty * move_range, 0).rotated(ghost_rotation), (1 - backward_penalty) * move_range, Color(0, 1, 0, 0.10))
+		var backward_penalty = 0.5
+		var rotation_penalty = 0.5 - 0.5 * cos(ghost_rotation - base_rotation)
+		var circle_center = Vector2(backward_penalty * move_range / 4.0, 0).rotated(base_rotation) + Vector2(backward_penalty * move_range / 4.0, 0).rotated(ghost_rotation)
+		var circle_radius = (1 - (1 + rotation_penalty) * backward_penalty / 2.0) * move_range
+		draw_circle(circle_center, circle_radius, Color(0, 1, 0, 0.10))
 	# Arc d’orientation
 	if orientation_range > 0:
 		var arc_radius = sprite_size * 1.5
