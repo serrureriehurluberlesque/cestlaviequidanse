@@ -10,6 +10,8 @@ radius = 1200.0
 
 [node name="Decider" parent="." index="2"]
 script = ExtResource("2_1ji4x")
+angle_minimal = 1.5707963267948966
+distance_ideal = 300.0
 
 [node name="Detection" type="Area2D" parent="Decider" index="0"]
 visible = false

@@ -77,4 +77,3 @@ func _compute_value():
 		var amount_ratio = value / stat["base_value"]
 		if stat.has("particles") and stat["particles"]:
 			stat["particles"].amount_ratio = amount_ratio
-			print(stat)
