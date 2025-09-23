@@ -66,14 +66,30 @@ func angles_are_far_enough(my_angle: float, closer_angles: Array, min_angle: flo
 func compute_reposition_angle(enemy, focus_allies) -> Vector2:
 	var center = enemy.global_position
 	var my_pos = get_parent().global_position
-	var my_dist = my_pos.distance_to(center)
-	var sorted_focus = focus_allies.duplicate()
-	sorted_focus.sort_custom(func(a, b):
-		return a.global_position.distance_to(center) < b.global_position.distance_to(center)
+	var my_angle = (my_pos - center).angle()
+	
+	# Calculer l'angle de chaque allié autour de l'ennemi
+	var angle_focus = []
+	for ally in focus_allies:
+		var angle = (ally.global_position - center).angle()
+		angle_focus.append({ "ally": ally, "angle": angle })
+	
+	# Trier les alliés par angle croissant
+	angle_focus.sort_custom(func(a, b):
+		return a["angle"] < b["angle"]
 	)
-	var base_angle = (sorted_focus[0].global_position - center).angle()
-	var my_idx = sorted_focus.find(get_parent())
+	
+	# Trouver l'index de self dans la liste triée
+	var my_idx = 0
+	for i in range(angle_focus.size()):
+		if angle_focus[i]["ally"] == get_parent():
+			my_idx = i
+			break
+	
+	# L'angle de base est celui du premier allié de la liste triée
+	var base_angle = angle_focus[0]["angle"]
 	var desired_angle = base_angle + angle_minimal * float(my_idx)
+	
 	return center + Vector2(distance_ideal, 0).rotated(desired_angle)
 
 func _start_selecting_action(actions, position, angle, intensity, team):
@@ -125,7 +141,8 @@ func _start_selecting_action(actions, position, angle, intensity, team):
 			return
 
 	var reposition_pos = compute_reposition_angle(target, focused_allies)
-	move_target = reposition_pos
-	rotation_target = (target_pos - reposition_pos).angle()
+	var move_max_expected = actions.get("Move").expected_position_range()
+	move_target = my_position + move_max_expected * (reposition_pos - my_position).normalized()
+	rotation_target = (target_pos - move_target).angle()
 	rotation_intensity = 128.0
 	selected_action = actions.get("Move")
