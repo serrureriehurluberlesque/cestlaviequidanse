@@ -7,7 +7,7 @@ size = Vector2(80, 190)
 
 [node name="HeavyAttack" instance=ExtResource("1_ujs17")]
 move_range = 0.5
-orientation_range = 0.5
+orientation_range = 0.25
 damage = 35.0
 defense = 0.0
 weapon_type = 2

@@ -3,7 +3,7 @@ extends Node2D
 
 signal ended(won)
 
-@export var ROUND_TOTAL_NUMBER = 40
+@export var ROUND_TOTAL_NUMBER = 100
 @export var TITLE = "Arena"
 
 @onready var action_selection_timer := $ActionSelectionTimer as Timer

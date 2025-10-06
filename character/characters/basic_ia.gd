@@ -124,10 +124,19 @@ func _start_selecting_action(actions, position, angle, intensity, team):
 
 		var valid_actions = actions.values().filter(func(action):
 			return (
-				dist < action.expected_position_range() and
-				rotation_diff < action.expected_rotation_range()
+				dist < action.expected_position_range() + 64 and  # hardcoded ennemi half size
+				rotation_diff < action.expected_rotation_range() + 64 / dist  # hardcoded ennemi half size angle
 			)
 		)
+		
+		#for action in actions.values():
+			#print(action.name)
+			#print(dist)
+			#print(action.expected_position_range())
+			#print("angle")
+			#print(rotation_diff)
+			#print(action.expected_rotation_range())
+		
 		if valid_actions.size() > 0:
 			valid_actions.sort_custom(func(a, b):
 				return a.damage > b.damage
