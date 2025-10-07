@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://brrts4nchl7ga" path="res://character/action.tscn" id="1_vsksi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8v46k"]
-size = Vector2(120, 80)
+size = Vector2(120, 140)
 
 [node name="LightAttack" instance=ExtResource("1_vsksi")]
-move_range = 2.25
+move_range = 2.5
 orientation_range = 1.5
 defense = 0.0
 weapon_type = 3
@@ -16,7 +16,7 @@ buff_tag = "orientation"
 buff_value = 0.25
 
 [node name="Hitbox" parent="." index="0"]
-position = Vector2(0, -114)
+position = Vector2(0, -130)
 
 [node name="Shape" parent="Hitbox" index="0"]
 shape = SubResource("RectangleShape2D_8v46k")

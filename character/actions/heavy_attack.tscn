@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://brrts4nchl7ga" path="res://character/action.tscn" id="1_ujs17"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4pu8v"]
-size = Vector2(80, 190)
+size = Vector2(80, 160)
 
 [node name="HeavyAttack" instance=ExtResource("1_ujs17")]
 move_range = 0.5
@@ -16,7 +16,7 @@ buff_tag = "damage"
 buff_value = 0.25
 
 [node name="Hitbox" parent="." index="0"]
-position = Vector2(0, -180)
+position = Vector2(0, -150)
 monitorable = false
 
 [node name="Shape" parent="Hitbox" index="0"]

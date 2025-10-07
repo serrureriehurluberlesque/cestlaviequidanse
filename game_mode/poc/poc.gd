@@ -6,7 +6,7 @@ extends Node
 @onready var world := $World as Node2D
 
 var arena: Arena
-var level := 1
+var level := 4
 
 
 func _ready() -> void:

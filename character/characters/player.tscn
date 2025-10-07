@@ -9,7 +9,6 @@ range_indicator = NodePath("Decider/RangeIndicator")
 color_override = Color(0.0980392, 0.74902, 0.0980392, 1)
 
 [node name="LightAttack" parent="Actions" index="1"]
-damage = 10.0
 has_fast_activation = false
 
 [node name="Decider" parent="." index="2"]

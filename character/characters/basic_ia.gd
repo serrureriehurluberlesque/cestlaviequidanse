@@ -59,7 +59,7 @@ func get_my_angle_and_closer_angles(enemy, focus_allies) -> Dictionary:
 func angles_are_far_enough(my_angle: float, closer_angles: Array, min_angle: float) -> bool:
 	for angle in closer_angles:
 		var diff = abs(wrapf(angle - my_angle, -PI, PI))
-		if diff < min_angle * 0.8:  # on se donne un peu de marge par rapport à min_angle
+		if diff < min_angle * 0.75:  # on se donne un peu de marge par rapport à min_angle
 			return false
 	return true
 
@@ -108,13 +108,16 @@ func _start_selecting_action(actions, position, angle, intensity, team):
 	var target = get_closest_enemy(my_position, visible_enemies)
 	var target_pos = target.global_position
 
+	if randf() < 0.333:  # ajout de guess de mouvement futur par l'IA
+		target_pos += randf() ** 0.5 * 256 * Vector2(1, 0).rotated(randf() * 2 * PI)
+	
 	var visible_allies = get_visible_allies(my_team)
 	var focused_allies = get_allies_focused_on_enemy(target, visible_allies, my_position)
 
 	var angle_info = get_my_angle_and_closer_angles(target, focused_allies)
 	var my_angle = angle_info["my_angle"]
 	var closer_angles = angle_info["closer_angles"]
-
+	
 	if angles_are_far_enough(my_angle, closer_angles, angle_minimal):
 		var delta_position = target_pos - my_position
 		var dist = delta_position.length()
@@ -129,14 +132,6 @@ func _start_selecting_action(actions, position, angle, intensity, team):
 			)
 		)
 		
-		#for action in actions.values():
-			#print(action.name)
-			#print(dist)
-			#print(action.expected_position_range())
-			#print("angle")
-			#print(rotation_diff)
-			#print(action.expected_rotation_range())
-		
 		if valid_actions.size() > 0:
 			valid_actions.sort_custom(func(a, b):
 				return a.damage > b.damage
@@ -144,11 +139,27 @@ func _start_selecting_action(actions, position, angle, intensity, team):
 			var best_action = valid_actions[0]
 			var optimal_distance = best_action.optimal_distance()
 			move_target = target_pos - direction * optimal_distance
+			
+			var min_ally_distance = 192.0
+			var closest_ally = null
+			var closest_dist = INF
+			for ally in focused_allies:
+				if ally == my_character:
+					continue
+				var dist_to_ally = move_target.distance_to(ally.global_position)
+				if dist_to_ally < closest_dist:
+					closest_dist = dist_to_ally
+					closest_ally = ally
+			if closest_ally and closest_dist < min_ally_distance:
+				var repulse_vec = (move_target - closest_ally.global_position).normalized()
+				var needed_dist = min_ally_distance - closest_dist
+				move_target += repulse_vec * needed_dist
+			
 			rotation_target = rotation_to_target
 			rotation_intensity = 128.0
 			selected_action = best_action
 			return
-
+	
 	var reposition_pos = compute_reposition_angle(target, focused_allies)
 	var move_max_expected = actions.get("Move").expected_position_range()
 	move_target = my_position + move_max_expected * (reposition_pos - my_position).normalized()
